@@ -18,26 +18,30 @@ public class Lectura {
             for(int i=0;i<lec.length;i++){
                 nums[i] = (char) lec[i];         //transformo todos los bytes en char
             }
-            int j = 0;
+            int J = 0;
+            int I=0;
             StringBuilder sb = new StringBuilder();
-            for (char num : nums) {
-                if (j < largo){
+            do {
+                char num=' ';
+                if (I<nums.length)
+                    num = nums[I];
+                if (J < largo) {
                     sb.append(num);                 //armo los strings
-                    j++;
-                }
-                else {
+                    J++;
+                } else {
                     String str = sb.toString();
                     sb = new StringBuilder();
-                    j = 0;
-                    if (!fuente.containsKey(str)){
-                        fuente.put(str,1);          //si no existe el codigo, lo agrego
-                    }
-                    else {
+                    sb.append(num);
+                    J = 1;
+                    if (!fuente.containsKey(str)) {
+                        fuente.put(str, 1);          //si no existe el codigo, lo agrego
+                    } else {
                         acum = fuente.get(str);
-                        fuente.put(str,++acum);
+                        fuente.put(str, acum + 1);
                     }
                 }
-            }
+                I++;
+            } while (I<=nums.length);
         } catch (IOException ignored) {
         }
         return fuente;
@@ -46,4 +50,6 @@ public class Lectura {
     public static int getTOTAL() {
         return TOTAL;
     }
+
+
 }

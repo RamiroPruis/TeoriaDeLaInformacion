@@ -17,18 +17,13 @@ public class App {
         }
         assert Fuente != null;
         Set<String> Codigos = Fuente.keySet();
-
-
         Iterator<String> itCod = Codigos.iterator();
-        int tot = 0;
+
         while(itCod.hasNext()) {
             String act = itCod.next();
-            int ap = Fuente.get(act);
-            System.out.println(act + ": " + ap);
-            tot+=ap;
+            double ap = Fuente.get(act);
+            double prob = ap/Lectura.getTOTAL();
+            System.out.println(act + ": " + String.format("%.4f",prob));
         }
-        System.out.println(tot);
-        System.out.println(Lectura.getTOTAL());
-
     }
 }
