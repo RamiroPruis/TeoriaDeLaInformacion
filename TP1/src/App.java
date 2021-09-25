@@ -15,15 +15,26 @@ public class App {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+
         assert Fuente != null;
         Set<String> Codigos = Fuente.keySet();
         Iterator<String> itCod = Codigos.iterator();
 
+        System.out.println("Datos de la fuente:");
+        System.out.println("*********************************");
+        System.out.println("Cantidad de simbolos: " + Fuente.size());
+
+        Fuente f = new Fuente(Fuente.size());
         while(itCod.hasNext()) {
             String act = itCod.next();
             double ap = Fuente.get(act);
             double prob = ap/Lectura.getTOTAL();
-            System.out.println(act + ": " + String.format("%.4f",prob));
+            f.agregaElemento(act,prob);
         }
+
+
+
+        System.out.println(" --> La entropia de la fuente es: " + f.calculaEntropia());
     }
 }
