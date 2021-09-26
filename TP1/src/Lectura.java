@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Set;
 
 
 /**
@@ -94,7 +95,19 @@ public class Lectura {
         return matriz;
     }
 
-    public void muestraMatriz(PrintStream output, double [][] matriz){
+
+    public Fuente cargaFuente(HashMap<String,Integer> datos){
+        Fuente fuente = new Fuente(datos.size());
+        Set<String> Codigos = datos.keySet();
+        for (String act : Codigos) {
+            double ap = datos.get(act);
+            double prob = ap / Lectura.getTOTAL();
+            fuente.agregaElemento(act, prob);
+        }
+        return fuente;
+    }
+
+    public void muestraMatriz(PrintStream output,double[][] matriz){
 
         for (int i=0; i< matriz.length; i++){
             output.print("|\t");
