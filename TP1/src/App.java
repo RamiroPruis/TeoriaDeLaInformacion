@@ -9,9 +9,9 @@ public class App {
     public static void main(String[] args) {
         HashMap<String,Integer> Fuente = null;
 
-
+        Lectura lectura = new Lectura();
         try {
-            Fuente = Lectura.leeDatos(5);
+            Fuente = lectura.cuentaApariciones(2);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -36,5 +36,22 @@ public class App {
 
 
         System.out.println(" --> La entropia de la fuente es: " + f.calculaEntropia());
+
+
+        double acum=0;
+        double[][] matriz = lectura.generaMatriz();
+
+        for (int i=0; i< matriz.length; i++){
+            for(int j=0; j< matriz[i].length; j++){
+                System.out.print(matriz[i][j] + "    ");
+                acum += matriz[i][j];
+            }
+            System.out.println();
+        }
+        System.out.println("suma: " +acum);
+
+
+
+
     }
 }
