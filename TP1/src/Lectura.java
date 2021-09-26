@@ -4,13 +4,16 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 
+
+/**
+ * Clase encargada de generar las estructuras necesarias para la lectura del archivo y el procesamiento de los datos.
+ */
 public class Lectura {
     private static int TOTAL=0;
     private char[] nums;
 
 
     public Lectura() {
-
         try {
             FileInputStream arch = new FileInputStream("anexo1-grupo6.txt");
             byte[] lec = arch.readAllBytes();
@@ -29,23 +32,22 @@ public class Lectura {
     public HashMap<String,Integer> cuentaApariciones(int largo) throws FileNotFoundException {
         HashMap<String,Integer> fuente = new HashMap<>();
         Integer acum;
-
         TOTAL = nums.length/largo;
-        int J = 0;
-        int I=0;
+        int j = 0;
+        int i=0;
         StringBuilder sb = new StringBuilder();
         do {
             char num=' ';
-            if (I<nums.length)
-                num = nums[I];
-            if (J < largo) {
+            if (i<nums.length)
+                num = nums[i];
+            if (j < largo) {
                 sb.append(num);                 //armo los strings
-                J++;
+                j++;
             } else {
                 String str = sb.toString();
                 sb = new StringBuilder();
                 sb.append(num);
-                J = 1;
+                j = 1;
                 if (!fuente.containsKey(str)) {
                     fuente.put(str, 1);          //si no existe el codigo, lo agrego
                 } else {
@@ -53,17 +55,14 @@ public class Lectura {
                     fuente.put(str, acum + 1);
                 }
             }
-            I++;
-            } while (I<=nums.length);
-
+            i++;
+            } while (i<=nums.length);
         return fuente;
     }
 
     public static int getTOTAL() {
         return TOTAL;
     }
-
-
 
     public double [][] generaMatriz(){
 
@@ -93,26 +92,19 @@ public class Lectura {
         return matriz;
     }
 
-    public double sumaFila(int fila, double [][] matriz){
+    private double sumaFila(int fila, double [][] matriz){
         int acum=0;
-        for (int j = 0; j < matriz[fila].length; j++){
+        for (int j = 0; j < matriz[fila].length; j++)
             acum += matriz[fila][j];
-
-        }
-
-
-        System.out.println(acum);
         return acum;
-
     }
 
-    public int devuelveIndices(String cod){
+    private int devuelveIndices(String cod){
         int result = 0;
         switch (cod){
             case "00":
                 result=0;
                 break;
-
             case "01":
                 result= 1;
                 break;
@@ -123,9 +115,7 @@ public class Lectura {
                 result=3;
                 break;
         }
-
         return result;
-
     }
 
 }
