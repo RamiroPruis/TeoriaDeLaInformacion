@@ -1,3 +1,4 @@
+import java.io.PrintStream;
 import java.util.*;
 
 /**
@@ -22,17 +23,16 @@ public class Fuente {
         this.probabilidades.put(simbolo,probabilidad);
         double infoact = (-Math.log(probabilidad) / Math.log(2));
         this.informacion.put(simbolo,infoact);
-       // System.out.printf("- %s: Probabilidad: %.4f | Cantidad de Informacion: %.3f  \n",simbolo,probabilidad,infoact);
     }
 
 
-    public void imprimeFuente(){
-        System.out.println("Datos de la fuente:");
-        System.out.println("*********************************");
-        System.out.println("Cantidad de simbolos: " + cantElementos);
-        this.probabilidades.forEach((key,value) ->  System.out.printf("- %s: Probabilidad: %.4f | Cantidad de Informacion: %.3f  \n",key,value,informacion.get(key)));
+    public void imprimeFuente(PrintStream output){
+        output.println("Datos de la fuente:");
+        output.println("*********************************");
+        output.println("Cantidad de simbolos: " + cantElementos);
+        this.probabilidades.forEach((key,value) ->  output.printf("- %s: Probabilidad: %.4f | Cantidad de Informacion: %.3f  \n",key,value,informacion.get(key)));
 
-        System.out.printf(" --> La entropia de la fuente es: %.3f bits/simbolo \n",calculaEntropia());
+        output.printf(" --> La entropia de la fuente es: %.3f bits/simbolo \n",calculaEntropia());
     }
 
     public void muestraDistribucion(){

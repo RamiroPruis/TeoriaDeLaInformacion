@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -25,7 +26,11 @@ public class App {
             double prob = ap/Lectura.getTOTAL();
             fuente.agregaElemento(act,prob);
         }
-        fuente.imprimeFuente();
+        try {
+            fuente.imprimeFuente(new PrintStream("./Resultados/Ejercicio1.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         double acum=0;
         double[][] matriz = lectura.generaMatriz();
 

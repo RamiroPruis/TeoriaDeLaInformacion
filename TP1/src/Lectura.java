@@ -1,6 +1,7 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -83,6 +84,7 @@ public class Lectura {
             matriz[devuelveIndices(codigoAct)][devuelveIndices(codigoAnt)] += 1;
 
         }
+        //Clonamos la matriz
         matrizContadora = Arrays.stream(matriz).map(double[]::clone).toArray(double[][]::new);
 
         for (int i=0; i< matriz.length; i++)
@@ -91,6 +93,11 @@ public class Lectura {
 
         return matriz;
     }
+
+    public void muestraMatriz(PrintStream output){
+
+    }
+
 
     private double sumaFila(int fila, double [][] matriz){
         int acum=0;
