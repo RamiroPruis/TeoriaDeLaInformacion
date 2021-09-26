@@ -27,21 +27,17 @@ public class App {
             fuente.agregaElemento(act,prob);
         }
         try {
-            fuente.imprimeFuente(new PrintStream("./Resultados/Ejercicio1.txt"));
+            fuente.imprimeFuente(new PrintStream("./Ejercicio1.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         double acum=0;
         double[][] matriz = lectura.generaMatriz();
+        try {
+            lectura.muestraMatriz(new PrintStream("./Ejercicio2.txt"), matriz);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
-
-       for (int i=0; i< matriz.length; i++){
-           for(int j=0; j< matriz[i].length; j++){
-               System.out.print(matriz[i][j] + "    ");
-               acum += matriz[i][j];
-            }
-            System.out.println();
-       }
-        System.out.println("suma: " +acum);
     }
 }

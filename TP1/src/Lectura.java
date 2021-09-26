@@ -94,8 +94,16 @@ public class Lectura {
         return matriz;
     }
 
-    public void muestraMatriz(PrintStream output){
+    public void muestraMatriz(PrintStream output, double [][] matriz){
 
+        for (int i=0; i< matriz.length; i++){
+            output.print("|\t");
+            for(int j=0; j< matriz[i].length; j++){
+                //output.print(matriz[i][j] + "    ");
+                output.printf("%.4f\t", matriz[i][j]);
+            }
+            output.println("|");
+        }
     }
 
 
