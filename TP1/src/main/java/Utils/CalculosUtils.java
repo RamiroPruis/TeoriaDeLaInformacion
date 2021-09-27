@@ -1,6 +1,5 @@
 package Utils;
 
-
 import org.ejml.simple.SimpleMatrix;
 
 public class CalculosUtils {
