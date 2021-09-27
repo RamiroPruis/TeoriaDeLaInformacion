@@ -27,6 +27,9 @@ public class Fuente {
         this.informacion.put(simbolo,infoact);
     }
 
+    public Set<String> getSetCodigos() {
+        return this.probabilidades.keySet();
+    }
 
     public void imprimeFuente(PrintStream output){
         output.println("Datos de la fuente:");

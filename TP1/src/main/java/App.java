@@ -1,7 +1,8 @@
 import Utils.CalculosUtils;
+import modelo.Codificador;
 import modelo.Fuente;
 import modelo.Lectura;
-import org.ejml.simple.SimpleMatrix;
+//import org.ejml.simple.SimpleMatrix;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,14 +44,21 @@ public class App {
         }
         double[][] matriz = lectura.generaMatriz();
 
-        SimpleMatrix V = CalculosUtils.generaVecEstacionario(matriz);
 
-        System.out.println(V);
+//        SimpleMatrix V = CalculosUtils.generaVecEstacionario(matriz);
+
+//        System.out.println(V);
 
         try {
             lectura.muestraMatriz(new PrintStream("./Resultados/Ejercicio2.txt"), matriz);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        Codificador cod = new Codificador();
+        cod.agregaCodigo(fuente5.getSetCodigos());
+        System.out.println("Todos tienen la misma longitud " +cod.esCodigoBloque());
+        System.out.println("Ninguna cadena es prefijo de otra "+cod.esInstantaneo());
+        System.out.println("No hay cadenas repetidas "+cod.esNoSingular());
     }
 }
