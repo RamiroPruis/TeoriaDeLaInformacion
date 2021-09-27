@@ -1,3 +1,5 @@
+package modelo;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -96,7 +98,7 @@ public class Lectura {
     }
 
 
-    public Fuente cargaFuente(HashMap<String,Integer> datos){
+    public static Fuente cargaFuente(HashMap<String,Integer> datos){
         Fuente fuente = new Fuente(datos.size());
         Set<String> Codigos = datos.keySet();
         for (String act : Codigos) {
@@ -144,18 +146,5 @@ public class Lectura {
                 break;
         }
         return result;
-    }
-
-
-    public double calculaEntropiaMarkoviana(double[] vec, double[][] matriz){
-        double acum1=0, acum2=0;
-        for (int i = 0; i < vec.length; i++){
-            acum2=0;
-            for (int j = 0; j< matriz[i].length; j++){
-                acum2 += matriz[j][i] * (-Math.log(matriz[j][i]) / Math.log(2));
-            }
-            acum1 += vec[i] * acum2;
-        }
-        return acum1;
     }
 }
