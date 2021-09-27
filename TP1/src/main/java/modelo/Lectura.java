@@ -1,5 +1,7 @@
 package modelo;
 
+import excepciones.IndiceInvalidoException;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -84,7 +86,11 @@ public class Lectura {
             sb.append(nums[act+1]);
             codigoAct = sb.toString();
 
-            matriz[devuelveIndices(codigoAct)][devuelveIndices(codigoAnt)] += 1;
+            try {
+                matriz[devuelveIndices(codigoAct)][devuelveIndices(codigoAnt)] ++;
+            } catch (IndiceInvalidoException e) {
+                e.printStackTrace();
+            }
 
         }
         //Clonamos la matriz
@@ -111,11 +117,11 @@ public class Lectura {
 
     public void muestraMatriz(PrintStream output,double[][] matriz){
 
-        for (int i=0; i< matriz.length; i++){
+        for (double[] doubles : matriz) {
             output.print("|\t");
-            for(int j=0; j< matriz[i].length; j++){
+            for (int j = 0; j < doubles.length; j++) {
                 //output.print(matriz[i][j] + "    ");
-                output.printf("%.4f\t", matriz[i][j]);
+                output.printf("%.4f\t", doubles[j]);
             }
             output.println("|");
         }
@@ -129,22 +135,13 @@ public class Lectura {
         return acum;
     }
 
-    private int devuelveIndices(String cod){
-        int result = 0;
-        switch (cod){
-            case "00":
-                result=0;
-                break;
-            case "01":
-                result= 1;
-                break;
-            case "10":
-                result=2;
-                break;
-            case "11":
-                result=3;
-                break;
-        }
-        return result;
+    private int devuelveIndices(String cod) throws IndiceInvalidoException {
+        return switch (cod) {
+            case "00" -> 0;
+            case "01" -> 1;
+            case "10" -> 2;
+            case "11" -> 3;
+            default -> throw new IndiceInvalidoException();
+        };
     }
 }

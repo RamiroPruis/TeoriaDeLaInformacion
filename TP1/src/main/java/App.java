@@ -2,8 +2,6 @@ import Utils.CalculosUtils;
 import modelo.Codificador;
 import modelo.Fuente;
 import modelo.Lectura;
-//import org.ejml.simple.SimpleMatrix;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -44,10 +42,8 @@ public class App {
         }
         double[][] matriz = lectura.generaMatriz();
 
+        double[] VecEst = CalculosUtils.generaVecEstacionario(matriz);
 
-//        SimpleMatrix V = CalculosUtils.generaVecEstacionario(matriz);
-
-//        System.out.println(V);
 
         try {
             lectura.muestraMatriz(new PrintStream("./Resultados/Ejercicio2.txt"), matriz);
