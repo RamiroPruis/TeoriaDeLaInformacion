@@ -158,5 +158,4 @@ public class Lectura {
         }
         return acum1;
     }
-
 }
