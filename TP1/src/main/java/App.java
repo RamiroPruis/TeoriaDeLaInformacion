@@ -1,3 +1,6 @@
+import Utils.CalculosUtils;
+import modelo.Fuente;
+import modelo.Lectura;
 import org.ejml.simple.SimpleMatrix;
 
 import java.io.File;
@@ -39,6 +42,10 @@ public class App {
             e.printStackTrace();
         }
         double[][] matriz = lectura.generaMatriz();
+
+        SimpleMatrix V = CalculosUtils.generaVecEstacionario(matriz);
+
+        System.out.println(V);
 
         try {
             lectura.muestraMatriz(new PrintStream("./Resultados/Ejercicio2.txt"), matriz);

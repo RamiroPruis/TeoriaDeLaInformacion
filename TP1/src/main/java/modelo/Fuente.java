@@ -1,3 +1,5 @@
+package modelo;
+
 import java.io.PrintStream;
 import java.util.*;
 
