@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Set;
 
 
 /**
@@ -94,8 +95,28 @@ public class Lectura {
         return matriz;
     }
 
-    public void muestraMatriz(PrintStream output){
 
+    public Fuente cargaFuente(HashMap<String,Integer> datos){
+        Fuente fuente = new Fuente(datos.size());
+        Set<String> Codigos = datos.keySet();
+        for (String act : Codigos) {
+            double ap = datos.get(act);
+            double prob = ap / Lectura.getTOTAL();
+            fuente.agregaElemento(act, prob);
+        }
+        return fuente;
+    }
+
+    public void muestraMatriz(PrintStream output,double[][] matriz){
+
+        for (int i=0; i< matriz.length; i++){
+            output.print("|\t");
+            for(int j=0; j< matriz[i].length; j++){
+                //output.print(matriz[i][j] + "    ");
+                output.printf("%.4f\t", matriz[i][j]);
+            }
+            output.println("|");
+        }
     }
 
 
@@ -123,6 +144,19 @@ public class Lectura {
                 break;
         }
         return result;
+    }
+
+
+    public double calculaEntropiaMarkoviana(double[] vec, double[][] matriz){
+        double acum1=0, acum2=0;
+        for (int i = 0; i < vec.length; i++){
+            acum2=0;
+            for (int j = 0; j< matriz[i].length; j++){
+                acum2 += matriz[j][i] * (-Math.log(matriz[j][i]) / Math.log(2));
+            }
+            acum1 += vec[i] * acum2;
+        }
+        return acum1;
     }
 
 }
