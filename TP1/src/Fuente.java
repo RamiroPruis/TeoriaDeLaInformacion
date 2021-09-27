@@ -33,6 +33,7 @@ public class Fuente {
         this.probabilidades.forEach((key,value) ->  output.printf("- %s: Probabilidad: %.4f | Cantidad de Informacion: %.3f  \n",key,value,informacion.get(key)));
 
         output.printf(" --> La entropia de la fuente es: %.3f bits/simbolo \n",calculaEntropia());
+        output.println("\n*********************************");
     }
 
     public void muestraDistribucion(){
