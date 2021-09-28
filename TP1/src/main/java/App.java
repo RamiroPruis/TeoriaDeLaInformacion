@@ -44,10 +44,8 @@ public class App {
         }
         double[][] matriz = lectura.generaMatriz();
 
+        double[] VecEst = CalculosUtils.generaVecEstacionario(matriz);
 
-        SimpleMatrix V = CalculosUtils.generaVecEstacionario(matriz);
-
-        System.out.println(V);
 
         try {
             lectura.muestraMatriz(new PrintStream("./Resultados/Ejercicio2.txt"), matriz);
