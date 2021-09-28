@@ -1,8 +1,0 @@
-Datos de la fuente:
-*********************************
-Cantidad de simbolos: 4
-- 11: Probabilidad: 0,2493 | Cantidad de Informacion: 2,004  
-- 00: Probabilidad: 0,2427 | Cantidad de Informacion: 2,043  
-- 01: Probabilidad: 0,2517 | Cantidad de Informacion: 1,990  
-- 10: Probabilidad: 0,2562 | Cantidad de Informacion: 1,965  
- --> La entropia de la fuente es: 2,000 bits/simbolo 

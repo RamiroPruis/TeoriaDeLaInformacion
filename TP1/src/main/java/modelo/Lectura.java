@@ -35,7 +35,12 @@ public class Lectura {
 
     }
 
-    public HashMap<String,Integer> cuentaApariciones(int largo) throws FileNotFoundException {
+    /**
+     * A partir de una secuencia binaria de digitos arma una fuente de un largo especifico
+     * @param largo cantidad de binits del simbolo
+     * @return La fuente indexada por sus simbolos con la cantidad de apariciones de cada uno
+     */
+    public HashMap<String,Integer> cuentaApariciones(int largo) {
         HashMap<String,Integer> fuente = new HashMap<>();
         Integer acum;
         TOTAL = nums.length/largo;
@@ -70,6 +75,11 @@ public class Lectura {
         return TOTAL;
     }
 
+
+    /**
+     * A partir de una secuencia binaria se calculan las probabilidades condicionales segun la fuente [00,01,10,11]
+     * @return Matriz de transicion
+     */
     public double [][] generaMatriz(){
 
         double [][] matriz = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
@@ -103,7 +113,11 @@ public class Lectura {
         return matriz;
     }
 
-
+    /**
+     * A partir de los datos recolectados, se genera una fuente
+     * @param datos Estructura de datos con los simbolos y su cantidad de apariciones
+     * @return La fuente
+     */
     public static Fuente cargaFuente(HashMap<String,Integer> datos){
         Fuente fuente = new Fuente(datos.size());
         Set<String> Codigos = datos.keySet();
@@ -115,12 +129,17 @@ public class Lectura {
         return fuente;
     }
 
+
+    /**
+     * Imprime la matriz formateada
+     * @param output Define la terminal de salida de los datos
+     * @param matriz Matriz que se quiere visualizar
+     */
     public void muestraMatriz(PrintStream output,double[][] matriz){
 
         for (double[] doubles : matriz) {
             output.print("|\t");
             for (int j = 0; j < doubles.length; j++) {
-                //output.print(matriz[i][j] + "    ");
                 output.printf("%.4f\t", doubles[j]);
             }
             output.println("|");
