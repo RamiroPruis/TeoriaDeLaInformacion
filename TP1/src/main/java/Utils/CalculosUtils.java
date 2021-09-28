@@ -36,14 +36,17 @@ public class CalculosUtils {
     }
 
     public static double calculaEntropiaMarkoviana(double[] vec, double[][] matriz){
-        double acum1=0, acum2=0;
+        double acum1=0, acum2;
         for (int i = 0; i < vec.length; i++){
             acum2=0;
-            for (int j = 0; j< matriz[i].length; j++){
-                acum2 += matriz[j][i] * (-Math.log(matriz[j][i]) / Math.log(2));
+            for (int j = 0; j < matriz[i].length; j++){
+                if (matriz[j][i]!=0)
+                    acum2 += matriz[j][i] * (-Math.log(matriz[j][i]) / Math.log(2));
             }
             acum1 += vec[i] * acum2;
         }
         return acum1;
     }
+
+
 }

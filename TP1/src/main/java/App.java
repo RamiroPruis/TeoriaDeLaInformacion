@@ -46,6 +46,9 @@ public class App {
 
         double[] VecEst = CalculosUtils.generaVecEstacionario(matriz);
 
+        System.out.println(CalculosUtils.calculaEntropiaMarkoviana(VecEst, matriz));
+
+
 
         try {
             lectura.muestraMatriz(new PrintStream("./Resultados/Ejercicio2.txt"), matriz);
