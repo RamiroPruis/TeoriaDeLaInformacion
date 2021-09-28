@@ -1,5 +1,7 @@
 package modelo;
 
+import excepciones.IndiceInvalidoException;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -33,7 +35,12 @@ public class Lectura {
 
     }
 
-    public HashMap<String,Integer> cuentaApariciones(int largo) throws FileNotFoundException {
+    /**
+     * A partir de una secuencia binaria de digitos arma una fuente de un largo especifico
+     * @param largo cantidad de binits del simbolo
+     * @return La fuente indexada por sus simbolos con la cantidad de apariciones de cada uno
+     */
+    public HashMap<String,Integer> cuentaApariciones(int largo) {
         HashMap<String,Integer> fuente = new HashMap<>();
         Integer acum;
         TOTAL = nums.length/largo;
@@ -68,6 +75,11 @@ public class Lectura {
         return TOTAL;
     }
 
+
+    /**
+     * A partir de una secuencia binaria se calculan las probabilidades condicionales segun la fuente [00,01,10,11]
+     * @return Matriz de transicion
+     */
     public double [][] generaMatriz(){
 
         double [][] matriz = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
@@ -84,7 +96,11 @@ public class Lectura {
             sb.append(nums[act+1]);
             codigoAct = sb.toString();
 
-            matriz[devuelveIndices(codigoAct)][devuelveIndices(codigoAnt)] += 1;
+            try {
+                matriz[devuelveIndices(codigoAct)][devuelveIndices(codigoAnt)] ++;
+            } catch (IndiceInvalidoException e) {
+                e.printStackTrace();
+            }
 
         }
         //Clonamos la matriz
@@ -97,7 +113,11 @@ public class Lectura {
         return matriz;
     }
 
-
+    /**
+     * A partir de los datos recolectados, se genera una fuente
+     * @param datos Estructura de datos con los simbolos y su cantidad de apariciones
+     * @return La fuente
+     */
     public static Fuente cargaFuente(HashMap<String,Integer> datos){
         Fuente fuente = new Fuente(datos.size());
         Set<String> Codigos = datos.keySet();
@@ -109,13 +129,18 @@ public class Lectura {
         return fuente;
     }
 
+
+    /**
+     * Imprime la matriz formateada
+     * @param output Define la terminal de salida de los datos
+     * @param matriz Matriz que se quiere visualizar
+     */
     public void muestraMatriz(PrintStream output,double[][] matriz){
 
-        for (int i=0; i< matriz.length; i++){
+        for (double[] doubles : matriz) {
             output.print("|\t");
-            for(int j=0; j< matriz[i].length; j++){
-                //output.print(matriz[i][j] + "    ");
-                output.printf("%.4f\t", matriz[i][j]);
+            for (int j = 0; j < doubles.length; j++) {
+                output.printf("%.4f\t", doubles[j]);
             }
             output.println("|");
         }
@@ -129,22 +154,13 @@ public class Lectura {
         return acum;
     }
 
-    private int devuelveIndices(String cod){
-        int result = 0;
-        switch (cod){
-            case "00":
-                result=0;
-                break;
-            case "01":
-                result= 1;
-                break;
-            case "10":
-                result=2;
-                break;
-            case "11":
-                result=3;
-                break;
-        }
-        return result;
+    private int devuelveIndices(String cod) throws IndiceInvalidoException {
+        return switch (cod) {
+            case "00" -> 0;
+            case "01" -> 1;
+            case "10" -> 2;
+            case "11" -> 3;
+            default -> throw new IndiceInvalidoException();
+        };
     }
 }

@@ -2,7 +2,6 @@ import Utils.CalculosUtils;
 import modelo.Codificador;
 import modelo.Fuente;
 import modelo.Lectura;
-//import org.ejml.simple.SimpleMatrix;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,17 +15,14 @@ public class App {
         Lectura lectura = new Lectura();
         Fuente fuente5 = null,fuente7 = null,fuente9 = null;
 
-        try {
-            datos = lectura.cuentaApariciones(5);
-            fuente5 = lectura.cargaFuente(datos);
+        datos = lectura.cuentaApariciones(5);
+        fuente5 = lectura.cargaFuente(datos);
 
-            datos = lectura.cuentaApariciones(7);
-            fuente7 = lectura.cargaFuente(datos);
+        datos = lectura.cuentaApariciones(7);
+        fuente7 = lectura.cargaFuente(datos);
 
-            datos = lectura.cuentaApariciones(9);
-            fuente9 = lectura.cargaFuente(datos);
-        } catch (FileNotFoundException ignored) {
-        }
+        datos = lectura.cuentaApariciones(9);
+        fuente9 = lectura.cargaFuente(datos);
 
         //CREO CARPETA REUSLTADOS
         File folder = new File ("./Resultados");
@@ -44,10 +40,8 @@ public class App {
         }
         double[][] matriz = lectura.generaMatriz();
 
+        double[] VecEst = CalculosUtils.generaVecEstacionario(matriz);
 
-//        SimpleMatrix V = CalculosUtils.generaVecEstacionario(matriz);
-
-//        System.out.println(V);
 
         try {
             lectura.muestraMatriz(new PrintStream("./Resultados/Ejercicio2.txt"), matriz);
