@@ -2,8 +2,10 @@ package Utils;
 
 import org.ejml.simple.SimpleMatrix;
 
+/**
+ * Define algoritmos necesarios para la resolucion de ejercicios
+ */
 public class CalculosUtils {
-
 
     /**
      * Genera el vector estacionario a partir de la matriz de transicion
@@ -35,6 +37,12 @@ public class CalculosUtils {
         return aux;
     }
 
+    /**
+     * Calcula la entropia de una fuente con memoria
+     * @param vec Vector Estacionario
+     * @param matriz Matriz de transicion
+     * @return valor de la entropia (bits/simbolo)
+     */
     public static double calculaEntropiaMarkoviana(double[] vec, double[][] matriz){
         double acum1=0, acum2;
         for (int i = 0; i < vec.length; i++){

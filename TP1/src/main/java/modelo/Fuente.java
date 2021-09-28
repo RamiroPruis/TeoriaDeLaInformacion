@@ -31,6 +31,10 @@ public class Fuente {
         return this.probabilidades.keySet();
     }
 
+    /**
+     * Imprime los datos de la fuente. Muestra la cantidad de simbolos, la probabilidad de aparicion de cada uno y la cantidad de informacion
+     * @param output Define la terminal de salida de los datos
+     */
     public void imprimeFuente(PrintStream output){
         output.println("Datos de la fuente:");
         output.println("*********************************");
@@ -39,12 +43,6 @@ public class Fuente {
 
         output.printf(" --> La entropia de la fuente es: %.3f bits/simbolo \n",calculaEntropia());
         output.println("\n*********************************");
-    }
-
-    public void muestraDistribucion(){
-        for (int i=0;i<cantElementos;i++){
-            System.out.println("S"+ i+1 + ":\'" + probabilidades.get(i));
-        }
     }
 
     /**
