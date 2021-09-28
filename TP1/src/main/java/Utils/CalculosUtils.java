@@ -57,4 +57,11 @@ public class CalculosUtils {
     }
 
 
+    public static String devuelveVectorString(double[] vecEst) {
+        StringBuilder sb = new StringBuilder();
+
+        for (double v : vecEst) sb.append(Double.toString(v)).append("\t");
+
+        return sb.toString();
+    }
 }

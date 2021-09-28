@@ -42,8 +42,6 @@ public class App {
 
         double[] VecEst = CalculosUtils.generaVecEstacionario(matriz);
 
-        System.out.println(CalculosUtils.calculaEntropiaMarkoviana(VecEst, matriz));
-
 
 
         try {
@@ -52,10 +50,25 @@ public class App {
             e.printStackTrace();
         }
 
-        Codificador cod = new Codificador();
-        cod.agregaCodigo(fuente5.getSetCodigos());
-        System.out.println("Todos tienen la misma longitud " +cod.esCodigoBloque());
-        System.out.println("Ninguna cadena es prefijo de otra "+cod.esInstantaneo());
-        System.out.println("No hay cadenas repetidas "+cod.esNoSingular());
+        try {
+            PrintStream output = new PrintStream("./Resultados/Ejercicio3.txt");
+            output.println("El Vector Estacionario es: " + CalculosUtils.devuelveVectorString(VecEst));
+            output.println("Y la entropia de la fuente markoviana es: "+ CalculosUtils.calculaEntropiaMarkoviana(VecEst, matriz));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            PrintStream output = new PrintStream("./Resultados/Ejercicio4.txt");
+            Codificador cod = new Codificador();
+            cod.agregaCodigo(fuente5.getSetCodigos());
+            output.println("Todos tienen la misma longitud " +cod.esCodigoBloque());
+            output.println("Ninguna cadena es prefijo de otra "+cod.esInstantaneo());
+            output.println("No hay cadenas repetidas "+cod.esNoSingular());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }
