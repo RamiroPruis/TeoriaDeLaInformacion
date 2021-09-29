@@ -21,17 +21,16 @@ public class CalculosUtils {
         double [] cero = {0,0,0,0,1};
         SimpleMatrix b = new SimpleMatrix(5,1,true,cero);
         SimpleMatrix V = M.solve(b);
-        return SimpleMatrixToArray(V,V.getNumElements());
+        return SimpleMatrixToArray(V);
     }
 
     /**
      * Convierte un vector de timpo SimpleMatrix a tipo double[]
      * @param vec Vector a convertir
-     * @param size Tamano del vector
      * @return Mismo vector pero de tipo double[]
      */
-    public static double[] SimpleMatrixToArray (SimpleMatrix vec,int size){
-        double[] aux = new double[size];
+    public static double[] SimpleMatrixToArray (SimpleMatrix vec){
+        double[] aux = new double[vec.getNumElements()];
         for(int i=0;i<vec.getNumElements();i++)
             aux[i] = vec.get(i);
         return aux;

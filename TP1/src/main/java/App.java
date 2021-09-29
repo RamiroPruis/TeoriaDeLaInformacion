@@ -2,6 +2,7 @@ import Utils.CalculosUtils;
 import modelo.Codificador;
 import modelo.Fuente;
 import modelo.Lectura;
+import modelo.huffman.Huffman;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,24 +11,40 @@ import java.util.HashMap;
 
 public class App {
 
+
+
     public static void main(String[] args) {
         HashMap<String,Integer> datos = null;
         Lectura lectura = new Lectura();
         Fuente fuente5 = null,fuente7 = null,fuente9 = null;
+        HashMap<String,String> TablaHuffman5, TablaHuffman7, TablaHuffman9;
 
         datos = lectura.cuentaApariciones(5);
         fuente5 = lectura.cargaFuente(datos);
+        TablaHuffman5 = (HashMap<String, String>) Huffman.creaArbolHuffman(datos);
+
 
         datos = lectura.cuentaApariciones(7);
         fuente7 = lectura.cargaFuente(datos);
+        TablaHuffman7 = (HashMap<String, String>) Huffman.creaArbolHuffman(datos);
+
 
         datos = lectura.cuentaApariciones(9);
         fuente9 = lectura.cargaFuente(datos);
+        TablaHuffman9 = (HashMap<String, String>) Huffman.creaArbolHuffman(datos);
+
 
         //CREO CARPETA REUSLTADOS
         File folder = new File ("./Resultados");
         folder.mkdirs();
         //CREO CARPETA REUSLTADOS
+        try {
+            lectura.escribeCodificadoHuffman(TablaHuffman5,5,new PrintStream("./Resultados/Codificado5.txt"));
+            lectura.escribeCodificadoHuffman(TablaHuffman7,7,new PrintStream("./Resultados/Codificado7.txt"));
+            lectura.escribeCodificadoHuffman(TablaHuffman9,9,new PrintStream("./Resultados/Codificado9.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         try {
             PrintStream output = new PrintStream("./Resultados/Ejercicio1.txt");

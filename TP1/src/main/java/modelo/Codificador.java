@@ -15,7 +15,6 @@ public class Codificador {
 
     public void agregaCodigo(Set<String> codes) {
         codigos.addAll(codes);
-
     }
 
     public void ordenaLista() {

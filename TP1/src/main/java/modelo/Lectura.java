@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -33,6 +34,26 @@ public class Lectura {
             e.printStackTrace();
         }
 
+    }
+
+    public void escribeCodificadoHuffman(Map<String,String> huffmanCode, int size, PrintStream output){
+        StringBuilder sb = new StringBuilder();
+        String codViejo;
+        StringBuilder codigoNuevo = new StringBuilder();
+        int i=0;
+        for (var car : nums){
+            if (i<size) {
+                sb.append(car);
+                i++;
+            }
+            else{
+               i=1;
+               codigoNuevo.append(huffmanCode.get(sb.toString()));
+               sb = new StringBuilder();
+               sb.append(car);
+            }
+        }
+        output.print(codigoNuevo);
     }
 
     /**
