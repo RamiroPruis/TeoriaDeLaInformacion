@@ -1,0 +1,3 @@
+Todos tienen la misma longitud true
+Ninguna cadena es prefijo de otra true
+No hay cadenas repetidas true
