@@ -39,9 +39,18 @@ public class App {
         folder.mkdirs();
         //CREO CARPETA REUSLTADOS
         try {
-            lectura.escribeCodificadoHuffman(TablaHuffman5,5,new PrintStream("./Resultados/Codificado5.txt"));
-            lectura.escribeCodificadoHuffman(TablaHuffman7,7,new PrintStream("./Resultados/Codificado7.txt"));
-            lectura.escribeCodificadoHuffman(TablaHuffman9,9,new PrintStream("./Resultados/Codificado9.txt"));
+            PrintStream out = new PrintStream("./Resultados/Codificado5.txt");
+            lectura.escribeCodificadoHuffman(TablaHuffman5,5,out);
+            out.println();
+            out.println("La longitud media del nuevo codigo es :" + fuente5.calculaLongitudMedia(TablaHuffman5));
+            out = new PrintStream("./Resultados/Codificado7.txt");
+            lectura.escribeCodificadoHuffman(TablaHuffman7,7,out);
+            out.println();
+            out.println("La longitud media del nuevo codigo es :" + fuente7.calculaLongitudMedia(TablaHuffman7));
+            out = new PrintStream("./Resultados/Codificado9.txt");
+            lectura.escribeCodificadoHuffman(TablaHuffman9,9,out);
+            out.println("La longitud media del nuevo codigo es :" + fuente9.calculaLongitudMedia(TablaHuffman9));
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -53,12 +62,10 @@ public class App {
             fuente9.imprimeFuente(output);
 
 
-
             double[][] matriz = lectura.generaMatriz();
-
             double[] VecEst = CalculosUtils.generaVecEstacionario(matriz);
-            lectura.muestraMatriz(new PrintStream("./Resultados/Ejercicio2.txt"), matriz);
 
+            lectura.muestraMatriz(new PrintStream("./Resultados/Ejercicio2.txt"), matriz);
 
             output = new PrintStream("./Resultados/Ejercicio3.txt");
             output.println("El Vector Estacionario es: " + CalculosUtils.devuelveVectorString(VecEst));
@@ -73,51 +80,5 @@ public class App {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-//        double[][] matriz = lectura.generaMatriz();
-//
-//        double[] VecEst = CalculosUtils.generaVecEstacionario(matriz);
-
-
-
-//        try {
-//            lectura.muestraMatriz(new PrintStream("./Resultados/Ejercicio2.txt"), matriz);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
-//        try {
-//            PrintStream output = new PrintStream("./Resultados/Ejercicio3.txt");
-//            output.println("El Vector Estacionario es: " + CalculosUtils.devuelveVectorString(VecEst));
-//            output.println("Y la entropia de la fuente markoviana es: "+ CalculosUtils.calculaEntropiaMarkoviana(VecEst, matriz));
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
-//
-//        try {
-//            PrintStream output = new PrintStream("./Resultados/Ejercicio4.txt");
-//            Codificador cod = new Codificador();
-//            cod.agregaCodigo(fuente5.getSetCodigos());
-//            output.println("Todos tienen la misma longitud " +cod.esCodigoBloque());
-//            output.println("Ninguna cadena es prefijo de otra "+cod.esInstantaneo());
-//            output.println("No hay cadenas repetidas "+cod.esNoSingular());
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-/*
-        inciso 2b
-        System.out.println("Longitud Media: " + fuente5.calculaLongitudMedia());
-        fuente5.cumpleKraft(5);
-        System.out.println("Entropia: " + fuente5.calculaEntropia());
-
-        System.out.println("Longitud Media:" + fuente7.calculaLongitudMedia());
-        fuente7.cumpleKraft(7);
-        System.out.println("Entropia: "  + fuente7.calculaEntropia());
-
-        System.out.println("Longitud Media:" + fuente9.calculaLongitudMedia());
-        fuente9.cumpleKraft(9);
-        System.out.println("Entropia: " + fuente9.calculaEntropia());
-
-*/
     }
 }

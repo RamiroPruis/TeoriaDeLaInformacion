@@ -51,7 +51,7 @@ public class Lectura {
                sb.append(car);
             }
         }
-        output.print(codigoNuevo);
+        output.println(codigoNuevo);
     }
 
     /**

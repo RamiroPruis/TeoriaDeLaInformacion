@@ -21,6 +21,7 @@ class Nodo
         this.freq = freq;
         this.izq = left;
         this.der = right;
+
     }
 }
 class ImplementComparator implements Comparator<Nodo> {
@@ -77,7 +78,7 @@ public class Huffman
 
         // Print the Huffman codes
 
-        System.out.println("Codidos de Huffman: "+ huffmanCode);
+
 
         return huffmanCode;
 

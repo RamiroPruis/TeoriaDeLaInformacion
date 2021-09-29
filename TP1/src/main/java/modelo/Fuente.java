@@ -72,6 +72,16 @@ public class Fuente {
         return longitud;
     }
 
+    public double calculaLongitudMedia(HashMap<String,String> huffman){
+        double longitud=0;
+
+        for (var cod : huffman.entrySet()){
+            longitud += this.probabilidades.get(cod.getKey())* cod.getValue().length();
+        }
+
+        return longitud;
+    }
+
     public void cumpleKraft(int largo) {
         double sum = probabilidades.size() * (Math.pow(2, -largo));
         System.out.println("El valor de la sumatoria es: " + sum);
