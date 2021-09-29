@@ -60,4 +60,26 @@ public class Fuente {
         }
         return suma;
     }
+
+    public double calculaLongitudMedia(){
+        double longitud = 0;
+        Set<String> Codigos = this.getSetCodigos();
+        Iterator<String> itCod = Codigos.iterator();
+        while(itCod.hasNext()) {
+            String act=itCod.next();
+            longitud+=(this.probabilidades.get(act)*act.length());
+        }
+        return longitud;
+    }
+
+    public void cumpleKraft(int largo) {
+        double sum = probabilidades.size() * (Math.pow(2, -largo));
+        System.out.println("El valor de la sumatoria es: " + sum);
+        if (sum <= 1)
+            System.out.println("Cumple con la Inecuacion de Kraft");
+        else {
+            System.out.println("No cumple con la inecuacion");
+        }
+    }
+
 }

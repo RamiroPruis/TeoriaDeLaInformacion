@@ -1,6 +1,10 @@
 package Utils;
 
+import modelo.Fuente;
 import org.ejml.simple.SimpleMatrix;
+
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Define algoritmos necesarios para la resolucion de ejercicios
@@ -54,4 +58,7 @@ public class CalculosUtils {
         }
         return acum1;
     }
+
+
+
 }

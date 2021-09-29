@@ -51,8 +51,21 @@ public class App {
 
         Codificador cod = new Codificador();
         cod.agregaCodigo(fuente5.getSetCodigos());
-        System.out.println("Todos tienen la misma longitud " +cod.esCodigoBloque());
+
+        System.out.println("Longitud Media: " + fuente5.calculaLongitudMedia());
+        fuente5.cumpleKraft(5);
+        System.out.println("Entropia: " + fuente5.calculaEntropia());
+
+        System.out.println("Longitud Media:" + fuente7.calculaLongitudMedia());
+        fuente7.cumpleKraft(7);
+        System.out.println("Entropia: "  + fuente7.calculaEntropia());
+
+        System.out.println("Longitud Media:" + fuente9.calculaLongitudMedia());
+        fuente9.cumpleKraft(9);
+        System.out.println("Entropia: " + fuente9.calculaEntropia());
+        /*System.out.println("Todos tienen la misma longitud " +cod.esCodigoBloque());
         System.out.println("Ninguna cadena es prefijo de otra "+cod.esInstantaneo());
         System.out.println("No hay cadenas repetidas "+cod.esNoSingular());
+         */
     }
 }
