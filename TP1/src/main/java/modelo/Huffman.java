@@ -1,9 +1,28 @@
-package modelo.huffman;
+package modelo;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+class Nodo
+{
+    String simbolo;
+    Integer freq;
+    Nodo izq = null, der = null;
+
+    Nodo(String ch, Integer freq)
+    {
+        this.simbolo = ch;
+        this.freq = freq;
+    }
+    public Nodo(String ch, Integer freq, Nodo left, Nodo right)
+    {
+        this.simbolo = ch;
+        this.freq = freq;
+        this.izq = left;
+        this.der = right;
+    }
+}
 class ImplementComparator implements Comparator<Nodo> {
     public int compare(Nodo x, Nodo y) {
         return x.freq - y.freq;

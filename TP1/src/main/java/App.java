@@ -2,7 +2,7 @@ import Utils.CalculosUtils;
 import modelo.Codificador;
 import modelo.Fuente;
 import modelo.Lectura;
-import modelo.huffman.Huffman;
+import modelo.Huffman;
 
 import java.io.File;
 import java.io.FileNotFoundException;

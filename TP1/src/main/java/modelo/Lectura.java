@@ -28,8 +28,6 @@ public class Lectura {
             for(int i=0;i<lec.length;i++){
                 nums[i] = (char) lec[i];         //transformo todos los bytes en char
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
