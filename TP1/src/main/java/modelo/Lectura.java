@@ -31,7 +31,6 @@ public class Lectura {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void escribeCodificadoHuffman(Map<String,String> huffmanCode, int size, PrintStream output){
