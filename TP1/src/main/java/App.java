@@ -11,8 +11,6 @@ import java.util.HashMap;
 
 public class App {
 
-
-
     public static void main(String[] args) {
         HashMap<String,Integer> datos = null;
         Lectura lectura = new Lectura();
@@ -40,16 +38,17 @@ public class App {
         //CREO CARPETA REUSLTADOS
         try {
             PrintStream out = new PrintStream("./Resultados/Codificado5.txt");
+            PrintStream outLongitudes = new PrintStream("./Resultados/LongitudesCodificados.txt");
             lectura.escribeCodificadoHuffman(TablaHuffman5,5,out);
             out.println();
-            out.println("La longitud media del nuevo codigo es :" + fuente5.calculaLongitudMedia(TablaHuffman5));
+            outLongitudes.println("ESCENARIO 1: La longitud media del nuevo codigo es :" + fuente5.calculaLongitudMedia(TablaHuffman5));
             out = new PrintStream("./Resultados/Codificado7.txt");
             lectura.escribeCodificadoHuffman(TablaHuffman7,7,out);
             out.println();
-            out.println("La longitud media del nuevo codigo es :" + fuente7.calculaLongitudMedia(TablaHuffman7));
+            outLongitudes.println("ESCENARIO 2: La longitud media del nuevo codigo es :" + fuente7.calculaLongitudMedia(TablaHuffman7));
             out = new PrintStream("./Resultados/Codificado9.txt");
             lectura.escribeCodificadoHuffman(TablaHuffman9,9,out);
-            out.println("La longitud media del nuevo codigo es :" + fuente9.calculaLongitudMedia(TablaHuffman9));
+            outLongitudes.println("ESCENARIO 3: La longitud media del nuevo codigo es :" + fuente9.calculaLongitudMedia(TablaHuffman9));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -60,7 +59,6 @@ public class App {
             fuente5.imprimeFuente(output);
             fuente7.imprimeFuente(output);
             fuente9.imprimeFuente(output);
-
 
             double[][] matriz = lectura.generaMatriz();
             double[] VecEst = CalculosUtils.generaVecEstacionario(matriz);

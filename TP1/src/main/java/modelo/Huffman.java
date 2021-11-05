@@ -29,6 +29,10 @@ class ImplementComparator implements Comparator<Nodo> {
         return x.freq - y.freq;
     }
 }
+
+/**
+ * Implementa los algoritmos y las estructuras para el algoritmo de compresion de Huffman
+ */
 public class Huffman
 {
     public static void encode(Nodo root, String str, Map<String, String> huffmanCode)
@@ -72,14 +76,10 @@ public class Huffman
         //raiz del arbol de Huffman
         Nodo root = pq.peek();
 
-        // Traverse the Huffman tree and store the Huffman codes in a map
         Map<String, String> huffmanCode = new HashMap<>();
         encode(root, "", huffmanCode);
 
-        // Print the Huffman codes
-
-
-
+        // Imprime el MAPA
         return huffmanCode;
 
     }

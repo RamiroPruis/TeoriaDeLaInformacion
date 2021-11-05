@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="EjecutableTP1:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/EjecutableTP1_jar</output-path>
+    <root id="archive" name="TP1.jar">
+      <element id="module-output" name="TP1" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/ejml/ejml-all/0.41/ejml-all-0.41.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/ejml/ejml-dsparse/0.41/ejml-dsparse-0.41.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/ejml/ejml-ddense/0.41/ejml-ddense-0.41.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/ejml/ejml-fdense/0.41/ejml-fdense-0.41.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/ejml/ejml-zdense/0.41/ejml-zdense-0.41.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/ejml/ejml-simple/0.41/ejml-simple-0.41.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/ejml/ejml-cdense/0.41/ejml-cdense-0.41.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/ejml/ejml-core/0.41/ejml-core-0.41.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/ejml/ejml-fsparse/0.41/ejml-fsparse-0.41.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

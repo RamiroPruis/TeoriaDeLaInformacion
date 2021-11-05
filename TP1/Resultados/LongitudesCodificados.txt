@@ -1,0 +1,3 @@
+ESCENARIO 1: La longitud media del nuevo codigo es :5.000000000000001
+ESCENARIO 2: La longitud media del nuevo codigo es :6.9977777777777765
+ESCENARIO 3: La longitud media del nuevo codigo es :8.918857142857151
