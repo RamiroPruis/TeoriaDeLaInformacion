@@ -61,6 +61,10 @@ public class Fuente {
         return suma;
     }
 
+    /**
+     * Realiza el calculo de longitud media de la fuente
+     * @return valor de longitud media
+     */
     public double calculaLongitudMedia(){
         double longitud = 0;
         Set<String> Codigos = this.getSetCodigos();
@@ -72,6 +76,12 @@ public class Fuente {
         return longitud;
     }
 
+    /**
+     * Devuelve la longitud media de los codigos de Huffman asociados a la fuente.<br>
+     * <b>Pre</b>: Existe la TablaHuffman asociada a la fuente
+     * @param huffman TablaHuffman de la fuente
+     * @return longitud media de los codigos Huffman
+     */
     public double calculaLongitudMedia(HashMap<String,String> huffman){
         double longitud=0;
 
@@ -81,8 +91,6 @@ public class Fuente {
 
         return longitud;
     }
-
-
 
     public void cumpleKraft(int largo) {
         double sum = probabilidades.size() * (Math.pow(2, -largo));
