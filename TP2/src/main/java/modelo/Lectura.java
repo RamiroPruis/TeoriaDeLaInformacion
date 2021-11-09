@@ -3,6 +3,7 @@ package modelo;
 import excepciones.*;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.util.*;
 
 
@@ -27,14 +28,19 @@ public class Lectura {
         }
     }
 
-    public static void escribeCodificadoHuffman(Map<String,String> huffmanCode, FileInputStream file, PrintStream output){
+    public static void escribeCodificadoHuffman(Map<String,String> huffmanCode, FileInputStream file, PrintStream output) throws IOException {
         StringBuilder codigoNuevo = new StringBuilder();
         Scanner input = new Scanner(file);
         while(input.hasNext()){
             String word = input.next();
             codigoNuevo.append(huffmanCode.get(word));
         }
-        output.println(codigoNuevo);
+
+        //codificacion del String obtenido
+        BigInteger numCod = new BigInteger(codigoNuevo.toString(), 2);
+        byte[] bval = numCod.toByteArray();
+        output.write(bval);
+        output.close();
     }
 
     /**

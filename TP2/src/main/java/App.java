@@ -1,36 +1,43 @@
 import modelo.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
+import java.io.*;
+import java.math.BigInteger;
 import java.util.HashMap;
 
 
 public class App {
 
     public static void main(String[] args) {
+
+        new File("Resultados").mkdirs();
+            System.out.println("Los resultados se almacenan en la carpeta \"Resultados\"");
+
+            comprimeHuffman("Argentina.txt","Argentina.huf");
+            comprimeHuffman("Hungaro.txt","Hungaro.huf");
+            comprimeHuffman("Imagen.raw","Imagen.huf");
+
+
+    }
+
+    public static void comprimeHuffman(String inputName,String outputName){
         FileInputStream file = null;
         HashMap<String,Integer> datos = null;
         HashMap<String,String> huffman = null;
-
+        String newOut = "Resultados/" + outputName;
 
 
         try {
-            file = new FileInputStream("Argentina.txt");
+            file = new FileInputStream(inputName);
             datos = Lectura.cuentaApariciones(file);
 
             huffman = (HashMap<String, String>) Huffman.creaArbolHuffman(datos);
 
-            System.out.println(huffman);
-            PrintStream out = new PrintStream("Argentina.huf");
-            Lectura.escribeCodificadoHuffman(huffman,new FileInputStream("Argentina.txt"),out);
-
-
-        } catch (FileNotFoundException e) {
+            PrintStream out = new PrintStream(newOut);
+            Lectura.escribeCodificadoHuffman(huffman,new FileInputStream(inputName),out);
+            System.out.println("Archivo: " + outputName + " creado correctamente");
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
 
     }
 
