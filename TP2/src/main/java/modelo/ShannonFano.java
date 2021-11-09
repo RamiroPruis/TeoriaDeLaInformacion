@@ -1,9 +1,10 @@
 package modelo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.math.BigInteger;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class ShannonFano {
@@ -12,8 +13,11 @@ public class ShannonFano {
     private HashMap<Character, Double> characterFrequency;
 
     public ShannonFano(String str){
+
+        this.originalString = str;
         characterFrequency = new HashMap<Character, Double>();
         compressedResult = new HashMap<Character, String>();
+
 
         this.calculateFrequency();
         this.compressString();
@@ -32,7 +36,13 @@ public class ShannonFano {
     private void compressString() {
         List<Character> charList = new ArrayList<Character>();
 
-        Iterator<Entry<Character, Double>> entries = characterFrequency.entrySet().iterator();
+        //Creamos un linkedHashMap ordenado decrecientemente por valor (frecuencia)
+        LinkedHashMap<Character, Double> reverseSortedMap = new LinkedHashMap<>();
+        characterFrequency.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
+
+
+        Iterator<Entry<Character, Double>> entries = reverseSortedMap.entrySet().iterator();
         while (entries.hasNext()) {
             Entry<Character, Double> entry = entries.next();
             charList.add(entry.getKey());
@@ -68,6 +78,14 @@ public class ShannonFano {
             str.append(compressedResult.get(c));
         }
         return str.toString();
+    }
+
+    public void writeCompressed(PrintStream output) throws IOException {
+        //codificacion del String obtenido
+        BigInteger numCod = new BigInteger(getStringCompressed(), 2);
+        byte[] binary = numCod.toByteArray();
+        output.write(binary);
+        output.close();
     }
 
 }

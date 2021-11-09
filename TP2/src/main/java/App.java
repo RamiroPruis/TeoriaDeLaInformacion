@@ -17,6 +17,11 @@ public class App {
             comprimeHuffman("Imagen.raw","Imagen.huf");
 
 
+            comprimeShannonFano("Argentina.txt","Argentina.fan");
+            comprimeShannonFano("Hungaro.txt","Hungaro.fan");
+            comprimeShannonFano("Imagen.raw","Imagen.fan");
+
+
     }
 
     public static void comprimeHuffman(String inputName,String outputName){
@@ -40,6 +45,20 @@ public class App {
         }
 
     }
+
+    public static void comprimeShannonFano(String inputName, String outPutName){
+        Lectura lectura = new Lectura(inputName);
+        String strInitial = lectura.getNums();
+        ShannonFano shannon = new ShannonFano(strInitial);
+        try {
+            shannon.writeCompressed(new PrintStream("Resultados/" + outPutName));
+            System.out.println("Archivo: " + outPutName + " creado correctamente");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 
 

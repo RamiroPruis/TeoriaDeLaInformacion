@@ -15,9 +15,9 @@ public class Lectura {
     private char[] nums;
 
 
-    public Lectura() {
+    public Lectura(String fileName) {
         try {
-            FileInputStream arch = new FileInputStream("anexo1-grupo6.txt");
+            FileInputStream arch = new FileInputStream(fileName);
             byte[] lec = arch.readAllBytes();
             nums = new char[lec.length];
             for(int i=0;i<lec.length;i++){
@@ -26,6 +26,10 @@ public class Lectura {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getNums() {
+        return String.valueOf(nums);
     }
 
     public static void escribeCodificadoHuffman(Map<String,String> huffmanCode, FileInputStream file, PrintStream output) throws IOException {
@@ -38,8 +42,8 @@ public class Lectura {
 
         //codificacion del String obtenido
         BigInteger numCod = new BigInteger(codigoNuevo.toString(), 2);
-        byte[] bval = numCod.toByteArray();
-        output.write(bval);
+        byte[] binary = numCod.toByteArray();
+        output.write(binarydevuelve);
         output.close();
     }
 
