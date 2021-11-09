@@ -1,14 +1,9 @@
 package modelo;
 
 import excepciones.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+
+import java.io.*;
+import java.util.*;
 
 
 /**
@@ -32,22 +27,12 @@ public class Lectura {
         }
     }
 
-    public void escribeCodificadoHuffman(Map<String,String> huffmanCode, int size, PrintStream output){
-        StringBuilder sb = new StringBuilder();
-        String codViejo;
+    public static void escribeCodificadoHuffman(Map<String,String> huffmanCode, FileInputStream file, PrintStream output){
         StringBuilder codigoNuevo = new StringBuilder();
-        int i=0;
-        for (var car : nums){
-            if (i<size) {
-                sb.append(car);
-                i++;
-            }
-            else{
-                i=1;
-                codigoNuevo.append(huffmanCode.get(sb.toString()));
-                sb = new StringBuilder();
-                sb.append(car);
-            }
+        Scanner input = new Scanner(file);
+        while(input.hasNext()){
+            String word = input.next();
+            codigoNuevo.append(huffmanCode.get(word));
         }
         output.println(codigoNuevo);
     }
@@ -57,34 +42,18 @@ public class Lectura {
      * @param largo cantidad de binits del simbolo
      * @return La fuente indexada por sus simbolos con la cantidad de apariciones de cada uno
      */
-    public HashMap<String,Integer> cuentaApariciones(int largo) {
+    public static HashMap<String,Integer> cuentaApariciones(FileInputStream file) throws FileNotFoundException {
         HashMap<String,Integer> fuente = new HashMap<>();
-        Integer acum;
-        TOTAL = nums.length/largo;
-        int j = 0;
-        int i=0;
-        StringBuilder sb = new StringBuilder();
-        do {
-            char num=' ';
-            if (i<nums.length)
-                num = nums[i];
-            if (j < largo) {
-                sb.append(num);                 //armo los strings
-                j++;
-            } else {
-                String str = sb.toString();
-                sb = new StringBuilder();
-                sb.append(num);
-                j = 1;
-                if (!fuente.containsKey(str)) {
-                    fuente.put(str, 1);          //si no existe el codigo, lo agrego
-                } else {
-                    acum = fuente.get(str);
-                    fuente.put(str, acum + 1);
-                }
+        Scanner input = new Scanner(file);
+        while(input.hasNext()){
+            String word = input.next();
+            if (fuente.get(word) != null){
+                int value = fuente.get(word);
+                fuente.replace(word,value+1);
             }
-            i++;
-        } while (i<=nums.length);
+            else
+                fuente.put(word,1);
+        }
         return fuente;
     }
 

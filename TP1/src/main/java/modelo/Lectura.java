@@ -35,7 +35,6 @@ public class Lectura {
 
     public void escribeCodificadoHuffman(Map<String,String> huffmanCode, int size, PrintStream output){
         StringBuilder sb = new StringBuilder();
-        String codViejo;
         StringBuilder codigoNuevo = new StringBuilder();
         int i=0;
         for (var car : nums){

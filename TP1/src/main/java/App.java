@@ -18,17 +18,17 @@ public class App {
         HashMap<String,String> TablaHuffman5, TablaHuffman7, TablaHuffman9;
 
         datos = lectura.cuentaApariciones(5);
-        fuente5 = lectura.cargaFuente(datos);
+        fuente5 = Lectura.cargaFuente(datos);
         TablaHuffman5 = (HashMap<String, String>) Huffman.creaArbolHuffman(datos);
 
 
         datos = lectura.cuentaApariciones(7);
-        fuente7 = lectura.cargaFuente(datos);
+        fuente7 = Lectura.cargaFuente(datos);
         TablaHuffman7 = (HashMap<String, String>) Huffman.creaArbolHuffman(datos);
 
 
         datos = lectura.cuentaApariciones(9);
-        fuente9 = lectura.cargaFuente(datos);
+        fuente9 = Lectura.cargaFuente(datos);
         TablaHuffman9 = (HashMap<String, String>) Huffman.creaArbolHuffman(datos);
 
 
