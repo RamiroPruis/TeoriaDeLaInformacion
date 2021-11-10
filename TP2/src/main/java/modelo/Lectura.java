@@ -42,9 +42,48 @@ public class Lectura {
 
         //codificacion del String obtenido
         BigInteger numCod = new BigInteger(codigoNuevo.toString(), 2);
-        byte[] binary = numCod.toByteArray();
-        output.write(binary);
+        byte[] binarydevuelve = numCod.toByteArray();
+        output.write(binarydevuelve);
         output.close();
+    }
+
+    public static void escribeCodificadoRLC(String word, PrintStream output, boolean img) throws IOException{
+        char strout;
+        int i=1;
+        int n;
+        int count = 1;
+        if (img) {
+            word = word.replace("\n","").replace("\r","");
+        }
+        n=word.length();
+        do {
+
+            if(word.charAt(i) == word.charAt(i-1)){
+                count++;
+            }
+            else{
+                strout=word.charAt(i-1);
+                if (strout!='\n') {
+                    if (!img) {
+                        output.print(count);
+                        output.print(strout);
+                    }
+                    else{
+                        output.print(count);
+                        output.println(strout);
+                    }
+                }
+                else{
+                    output.print(strout);
+                }
+                count = 1;
+
+            }
+            i++;
+        }
+        while (i < n);
+        output.print(count);
+        output.print(word.charAt(i-1));
     }
 
     /**
@@ -66,6 +105,28 @@ public class Lectura {
         }
         return fuente;
     }
+
+
+    public static HashMap<String,Integer> AparicionesRLC(FileInputStream file, PrintStream output) throws FileNotFoundException, IOException {
+        HashMap<String,Integer> fuente = new HashMap<>();
+        Scanner input = new Scanner(file);
+        input.useDelimiter(System.getProperty("line.separator"));
+        while(input.hasNext()) {
+            String word = input.next();
+            for (int i = 0; i < word.length(); i++) {
+                String letra = String.valueOf(word.charAt(i));
+                if (fuente.get(letra) != null) {
+                    int valor = fuente.get(letra);
+                    fuente.replace(letra, valor + 1);
+                } else {
+                    fuente.put(letra, 1);
+                }
+            }
+        }
+        return fuente;
+    }
+
+
 
     public static int getTOTAL() {
         return TOTAL;

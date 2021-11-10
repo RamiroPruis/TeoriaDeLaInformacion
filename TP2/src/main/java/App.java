@@ -16,6 +16,9 @@ public class App {
             comprimeHuffman("Hungaro.txt","Hungaro.huf");
             comprimeHuffman("Imagen.raw","Imagen.huf");
 
+            comprimeRLC("Argentina.txt","Argentina.RLC");
+            comprimeRLC("Hungaro.txt","Hungaro.RLC");
+            comprimeRLC("imagen.raw","Imagen.RLC");
 
             comprimeShannonFano("Argentina.txt","Argentina.fan");
             comprimeShannonFano("Hungaro.txt","Hungaro.fan");
@@ -58,7 +61,33 @@ public class App {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public static void comprimeRLC(String inputName, String outputName){
+        FileInputStream file = null;
+        Lectura lectura = new Lectura(inputName);
+        HashMap<String,Integer> datos = null;
+        String newOut = "Resultados/" + outputName;
+
+        try {
+            file = new FileInputStream(inputName);
+            System.out.println("Archivo: " + outputName + " creado correctamente");
+            PrintStream out = new PrintStream(newOut);
+            if (outputName.equalsIgnoreCase("imagen.rlc")){
+                Lectura.escribeCodificadoRLC(lectura.getNums(), out,true);
+
+            }
+            else {
+                Lectura.escribeCodificadoRLC(lectura.getNums(), out,false);
+            }
+            datos = Lectura.AparicionesRLC(file, out);
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+    } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
