@@ -8,9 +8,33 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class ShannonFano {
+    private final int ASCII_LENGTH = 7;
     private String originalString;
     private HashMap<Character, String> compressedResult;
     private HashMap<Character, Double> characterFrequency;
+    private double entropy;
+    private double averageLengthBefore;
+    private double averageLengthAfter;
+
+    public double getCompressionTaza(){
+        return averageLengthBefore/averageLengthAfter;
+    }
+
+    public double getRendimiento(){
+        return entropy/averageLengthAfter;
+    }
+
+    public double getEntropy() {
+        return entropy;
+    }
+
+    public double getAverageLengthBefore() {
+        return averageLengthBefore;
+    }
+
+    public double getAverageLengthAfter() {
+        return averageLengthAfter;
+    }
 
     public ShannonFano(String str){
 
@@ -21,6 +45,12 @@ public class ShannonFano {
 
         this.calculateFrequency();
         this.compressString();
+        this.calculateEntropy();
+        this.calculateAverageLengthBeforeCompression();
+        this.calculateAverageLengthAfterCompression();
+        System.out.println("La longitud media antes: " + this.averageLengthBefore);
+        System.out.println("La longitud media despues: " + this.averageLengthAfter);
+
     }
 
     private void calculateFrequency() {
@@ -69,6 +99,29 @@ public class ShannonFano {
             appendBit(result, upList, true);
             List<Character> downList = charList.subList(separator, charList.size());
             appendBit(result, downList, false);
+        }
+    }
+
+    private void calculateEntropy() {
+        double probability = 0.0;
+        for (Character c : originalString.toCharArray()) {
+            probability = 1.0 * characterFrequency.get(c) / this.originalString.length();
+            this.entropy += probability * (Math.log(1.0 / probability) / Math.log(2));
+        }
+    }
+
+    private void calculateAverageLengthBeforeCompression() {
+        double probability = 0.0;
+        for (Character c : originalString.toCharArray()) {
+            probability = 1.0 * characterFrequency.get(c) / this.originalString.length();
+            this.averageLengthBefore += probability * ASCII_LENGTH;
+        }
+    }
+    private void calculateAverageLengthAfterCompression() {
+        double probability = 0.0;
+        for (Character c : originalString.toCharArray()) {
+            probability = 1.0 * characterFrequency.get(c) / this.originalString.length();
+            this.averageLengthAfter += probability * compressedResult.get(c).length();
         }
     }
 

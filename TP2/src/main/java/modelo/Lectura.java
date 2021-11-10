@@ -43,13 +43,13 @@ public class Lectura {
         //codificacion del String obtenido
         BigInteger numCod = new BigInteger(codigoNuevo.toString(), 2);
         byte[] binary = numCod.toByteArray();
-        output.write(binarydevuelve);
+        output.write(binary);
         output.close();
     }
 
     /**
      * A partir de una secuencia binaria de digitos arma una fuente de un largo especifico
-     * @param largo cantidad de binits del simbolo
+     *
      * @return La fuente indexada por sus simbolos con la cantidad de apariciones de cada uno
      */
     public static HashMap<String,Integer> cuentaApariciones(FileInputStream file) throws FileNotFoundException {

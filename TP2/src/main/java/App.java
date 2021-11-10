@@ -53,6 +53,8 @@ public class App {
         try {
             shannon.writeCompressed(new PrintStream("Resultados/" + outPutName));
             System.out.println("Archivo: " + outPutName + " creado correctamente");
+            System.out.println("La taza de compresion fue " + shannon.getCompressionTaza() + " El rendimiento es  " + shannon.getRendimiento() + " Y la redundancia " + (1-shannon.getRendimiento()));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
