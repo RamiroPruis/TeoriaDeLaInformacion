@@ -47,26 +47,43 @@ public class Lectura {
         output.close();
     }
 
-    public static void escribeCodificadoRLC(String word, PrintStream output) throws IOException{
-        String strout;
-        int i;
-        int n = word.length();
+    public static void escribeCodificadoRLC(String word, PrintStream output, boolean img) throws IOException{
+        char strout;
+        int i=1;
+        int n;
         int count = 1;
-        for (i=1; i < n; i++) {
+        if (img) {
+            word = word.replace("\n","").replace("\r","");
+        }
+        n=word.length();
+        do {
 
             if(word.charAt(i) == word.charAt(i-1)){
                 count++;
             }
             else{
-                strout=String.valueOf(word.charAt(i-1));
-
-                output.print(strout);
-                output.print(count);
+                strout=word.charAt(i-1);
+                if (strout!='\n') {
+                    if (!img) {
+                        output.print(count);
+                        output.print(strout);
+                    }
+                    else{
+                        output.print(count);
+                        output.println(strout);
+                    }
+                }
+                else{
+                    output.print(strout);
+                }
                 count = 1;
-            }
 
+            }
+            i++;
         }
-        output.print(" " + count);
+        while (i < n);
+        output.print(count);
+        output.print(word.charAt(i-1));
     }
 
     /**
@@ -95,7 +112,6 @@ public class Lectura {
         input.useDelimiter(System.getProperty("line.separator"));
         while(input.hasNext()) {
             String word = input.next();
-            escribeCodificadoRLC(word.concat(" "), output);
             for (int i = 0; i < word.length(); i++) {
                 String letra = String.valueOf(word.charAt(i));
                 if (fuente.get(letra) != null) {
