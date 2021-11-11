@@ -1,22 +1,56 @@
 package modelo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.math.BigInteger;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class ShannonFano {
+    private final int ASCII_LENGTH = 7;
     private String originalString;
     private HashMap<Character, String> compressedResult;
     private HashMap<Character, Double> characterFrequency;
+    private double entropy;
+    private double averageLengthBefore;
+    private double averageLengthAfter;
+
+    public double getCompressionTaza(){
+        return averageLengthBefore/averageLengthAfter;
+    }
+
+    public double getRendimiento(){
+        return entropy/averageLengthAfter;
+    }
+
+    public double getEntropy() {
+        return entropy;
+    }
+
+    public double getAverageLengthBefore() {
+        return averageLengthBefore;
+    }
+
+    public double getAverageLengthAfter() {
+        return averageLengthAfter;
+    }
 
     public ShannonFano(String str){
+
+        this.originalString = str;
         characterFrequency = new HashMap<Character, Double>();
         compressedResult = new HashMap<Character, String>();
 
+
         this.calculateFrequency();
         this.compressString();
+        this.calculateEntropy();
+        this.calculateAverageLengthBeforeCompression();
+        this.calculateAverageLengthAfterCompression();
+        System.out.println("La longitud media antes: " + this.averageLengthBefore);
+        System.out.println("La longitud media despues: " + this.averageLengthAfter);
+
     }
 
     private void calculateFrequency() {
@@ -32,7 +66,13 @@ public class ShannonFano {
     private void compressString() {
         List<Character> charList = new ArrayList<Character>();
 
-        Iterator<Entry<Character, Double>> entries = characterFrequency.entrySet().iterator();
+        //Creamos un linkedHashMap ordenado decrecientemente por valor (frecuencia)
+        LinkedHashMap<Character, Double> reverseSortedMap = new LinkedHashMap<>();
+        characterFrequency.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
+
+
+        Iterator<Entry<Character, Double>> entries = reverseSortedMap.entrySet().iterator();
         while (entries.hasNext()) {
             Entry<Character, Double> entry = entries.next();
             charList.add(entry.getKey());
@@ -62,12 +102,43 @@ public class ShannonFano {
         }
     }
 
+    private void calculateEntropy() {
+        double probability = 0.0;
+        for (Character c : originalString.toCharArray()) {
+            probability = 1.0 * characterFrequency.get(c) / this.originalString.length();
+            this.entropy += probability * (Math.log(1.0 / probability) / Math.log(2));
+        }
+    }
+
+    private void calculateAverageLengthBeforeCompression() {
+        double probability = 0.0;
+        for (Character c : originalString.toCharArray()) {
+            probability = 1.0 * characterFrequency.get(c) / this.originalString.length();
+            this.averageLengthBefore += probability * ASCII_LENGTH;
+        }
+    }
+    private void calculateAverageLengthAfterCompression() {
+        double probability = 0.0;
+        for (Character c : originalString.toCharArray()) {
+            probability = 1.0 * characterFrequency.get(c) / this.originalString.length();
+            this.averageLengthAfter += probability * compressedResult.get(c).length();
+        }
+    }
+
     public String getStringCompressed(){
         StringBuilder str = new StringBuilder();
         for (Character c : originalString.toCharArray()) {
             str.append(compressedResult.get(c));
         }
         return str.toString();
+    }
+
+    public void writeCompressed(PrintStream output) throws IOException {
+        //codificacion del String obtenido
+        BigInteger numCod = new BigInteger(getStringCompressed(), 2);
+        byte[] binary = numCod.toByteArray();
+        output.write(binary);
+        output.close();
     }
 
 }
