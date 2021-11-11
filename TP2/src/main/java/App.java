@@ -37,12 +37,14 @@ public class App {
         try {
             file = new FileInputStream(inputName);
             datos = Lectura.cuentaApariciones(file);
-
             huffman = (HashMap<String, String>) Huffman.creaArbolHuffman(datos);
-
             PrintStream out = new PrintStream(newOut);
             Lectura.escribeCodificadoHuffman(huffman,new FileInputStream(inputName),out);
+
+
             System.out.println("Archivo: " + outputName + " creado correctamente");
+            calcCompression(inputName,newOut);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,8 +58,7 @@ public class App {
         try {
             shannon.writeCompressed(new PrintStream("Resultados/" + outPutName));
             System.out.println("Archivo: " + outPutName + " creado correctamente");
-            System.out.println("La taza de compresion fue " + shannon.getCompressionTaza() + " El rendimiento es  " + shannon.getRendimiento() + " Y la redundancia " + (1-shannon.getRendimiento()));
-
+            calcCompression(inputName,"Resultados/" + outPutName);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,8 +91,14 @@ public class App {
         }
     }
 
+    public static void calcCompression(String originalPath,String compressedPath){
+        File original = new File(originalPath);
+        File compressed = new File(compressedPath);
 
+        System.out.println("Tamano archivo original: "+ original.length() + " bytes");
+        System.out.println("Tamano archivo comprimido: " + compressed.length() + " bytes");
+        System.out.println("Tasa de compresion = " + original.length()/compressed.length() + ":1");
 
-
+    }
 
 }

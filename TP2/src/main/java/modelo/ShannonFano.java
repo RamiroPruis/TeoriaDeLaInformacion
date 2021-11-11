@@ -8,17 +8,11 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class ShannonFano {
-    private final int ASCII_LENGTH = 7;
     private String originalString;
     private HashMap<Character, String> compressedResult;
     private HashMap<Character, Double> characterFrequency;
     private double entropy;
-    private double averageLengthBefore;
     private double averageLengthAfter;
-
-    public double getCompressionTaza(){
-        return averageLengthBefore/averageLengthAfter;
-    }
 
     public double getRendimiento(){
         return entropy/averageLengthAfter;
@@ -26,10 +20,6 @@ public class ShannonFano {
 
     public double getEntropy() {
         return entropy;
-    }
-
-    public double getAverageLengthBefore() {
-        return averageLengthBefore;
     }
 
     public double getAverageLengthAfter() {
@@ -46,10 +36,7 @@ public class ShannonFano {
         this.calculateFrequency();
         this.compressString();
         this.calculateEntropy();
-        this.calculateAverageLengthBeforeCompression();
         this.calculateAverageLengthAfterCompression();
-        System.out.println("La longitud media antes: " + this.averageLengthBefore);
-        System.out.println("La longitud media despues: " + this.averageLengthAfter);
 
     }
 
@@ -110,13 +97,6 @@ public class ShannonFano {
         }
     }
 
-    private void calculateAverageLengthBeforeCompression() {
-        double probability = 0.0;
-        for (Character c : originalString.toCharArray()) {
-            probability = 1.0 * characterFrequency.get(c) / this.originalString.length();
-            this.averageLengthBefore += probability * ASCII_LENGTH;
-        }
-    }
     private void calculateAverageLengthAfterCompression() {
         double probability = 0.0;
         for (Character c : originalString.toCharArray()) {
