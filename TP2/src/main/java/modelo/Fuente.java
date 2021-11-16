@@ -66,9 +66,7 @@ public class Fuente {
         Iterator<String> itCod = Codigos.iterator();
         while(itCod.hasNext()) {
             String act=itCod.next();
-            System.out.println(act + ":" + this.probabilidades.get(act));
             longitud+=(this.probabilidades.get(act)*act.length());
-            System.out.println(longitud);
         }
         return longitud;
     }

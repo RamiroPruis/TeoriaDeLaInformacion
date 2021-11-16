@@ -58,14 +58,15 @@ public class App {
             out = outputResultados;
             entropia = fuenteHuff.calculaEntropia();
             longmedia = fuenteHuff.calculaLongitudMedia(huffman);
+            out.println("Archivo: " + outputName + " creado correctamente");
             out.println("La entropia de la fuente es : " + entropia );
             out.println("La longitud media de la fuente es : " + longmedia);
 
             double rendimiento = entropia/longmedia;
             out.println("El rendimiento de la fuente dada por el archivo " + outputName + " es:" + rendimiento);
             out.println("La redundancia es " + (1-rendimiento));
-            out.println();
-            calcCompression(inputName,newOut);
+            calcCompression(inputName,newOut, outputResultados);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -78,9 +79,15 @@ public class App {
         String strInitial = lectura.getNums();
         ShannonFano shannon = new ShannonFano(strInitial);
         try {
+            outputResultados.println();
             shannon.writeCompressed(new PrintStream("Resultados/" + outPutName));
             System.out.println("Archivo: " + outPutName + " creado correctamente");
-            calcCompression(inputName,"Resultados/" + outPutName);
+            outputResultados.println("Archivo: " + outPutName + " creado correctamente");
+            outputResultados.println("La entropia de la fuente es : " + shannon.getEntropy() );
+            outputResultados.println("La longitud media de la fuente es : " + shannon.getAverageLengthAfter());
+            outputResultados.println("Rendimiento: " + shannon.getRendimiento() + "\n Redundancia: " + (1-shannon.getRendimiento()));
+            calcCompression(inputName,"Resultados/" + outPutName, outputResultados);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -109,8 +116,12 @@ public class App {
             out = outputResultados;
 
             double rendimiento = fuente.calculaEntropia()/fuente.calculaLongitudMediaRLC();
+            out.println("Archivo: " + outputName + " creado correctamente");
+            out.println("La entropia de la fuente es : " + fuente.calculaEntropia());
+            out.println("La longitud media de la fuente es : " + fuente.calculaLongitudMedia());
             out.println("El rendimiento de la fuente dada por el archivo " + outputName + " es:" + rendimiento);
             out.println("La redundancia es " + (1-rendimiento));
+            calcCompression(inputName,"Resultados/" + outputName, outputResultados);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -119,14 +130,14 @@ public class App {
         }
     }
 
-    public static void calcCompression(String originalPath,String compressedPath){
+    public static void calcCompression(String originalPath,String compressedPath, PrintStream outputResultados){
         File original = new File(originalPath);
         File compressed = new File(compressedPath);
 
-        System.out.println("Tamano archivo original: "+ original.length() + " bytes");
-        System.out.println("Tamano archivo comprimido: " + compressed.length() + " bytes");
-        System.out.println("Tasa de compresion = " + original.length()/compressed.length() + ":1");
-
+        outputResultados.println("Tamano archivo original: "+ original.length() + " bytes");
+        outputResultados.println("Tamano archivo comprimido: " + compressed.length() + " bytes");
+        outputResultados.println("Tasa de compresion = " + original.length()/compressed.length() + ":1");
+        outputResultados.println();
     }
 
 }

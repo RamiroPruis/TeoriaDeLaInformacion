@@ -1,23 +1,86 @@
+Archivo: Argentina.huf creado correctamente
 La entropia de la fuente es : 7.574033462512692
 La longitud media de la fuente es : 7.61020881670536
 El rendimiento de la fuente dada por el archivo Argentina.huf es:0.9952464702265122
 La redundancia es 0.004753529773487752
+Tamano archivo original: 2564 bytes
+Tamano archivo comprimido: 410 bytes
+Tasa de compresion = 6:1
 
+Archivo: Hungaro.huf creado correctamente
 La entropia de la fuente es : 7.638372968615631
 La longitud media de la fuente es : 7.711111111111119
 El rendimiento de la fuente dada por el archivo Hungaro.huf es:0.9905670996763776
 La redundancia es 0.009432900323622428
+Tamano archivo original: 2768 bytes
+Tamano archivo comprimido: 347 bytes
+Tasa de compresion = 7:1
 
+Archivo: Imagen.huf creado correctamente
 La entropia de la fuente es : 1.0719570043010789
 La longitud media de la fuente es : 1.3778876377063687
 El rendimiento de la fuente dada por el archivo Imagen.huf es:0.777971276442728
 La redundancia es 0.222028723557272
+Tamano archivo original: 196618 bytes
+Tamano archivo comprimido: 11288 bytes
+Tasa de compresion = 17:1
 
 *****************************************************
+Archivo: Argentina.RLC creado correctamente
+La entropia de la fuente es : 4.451872549083878
+La longitud media de la fuente es : 0.9999999999999997
 El rendimiento de la fuente dada por el archivo Argentina.RLC es:0.2967915032722585
 La redundancia es 0.7032084967277414
+Tamano archivo original: 2564 bytes
+Tamano archivo comprimido: 5193 bytes
+Tasa de compresion = 0:1
+
+Archivo: Hungaro.RLC creado correctamente
+La entropia de la fuente es : 4.8653726767948715
+La longitud media de la fuente es : 1.0000000000000002
 El rendimiento de la fuente dada por el archivo Hungaro.RLC es:0.30408579229967947
 La redundancia es 0.6959142077003205
+Tamano archivo original: 2768 bytes
+Tamano archivo comprimido: 6369 bytes
+Tasa de compresion = 0:1
+
+Archivo: Imagen.RLC creado correctamente
+La entropia de la fuente es : 1.071912919308223
+La longitud media de la fuente es : 1.0
 El rendimiento de la fuente dada por el archivo Imagen.RLC es:0.05359564596541115
 La redundancia es 0.9464043540345889
+Tamano archivo original: 196618 bytes
+Tamano archivo comprimido: 11522 bytes
+Tasa de compresion = 17:1
+
 *****************************************************
+
+Archivo: Argentina.fan creado correctamente
+La entropia de la fuente es : 571.6352292240216
+La longitud media de la fuente es : 885.9508580343088
+Rendimiento: 0.6452222762020112
+ Redundancia: 0.3547777237979888
+Tamano archivo original: 2564 bytes
+Tamano archivo comprimido: 1876 bytes
+Tasa de compresion = 1:1
+
+
+Archivo: Hungaro.fan creado correctamente
+La entropia de la fuente es : 506.28767908759556
+La longitud media de la fuente es : 743.8385115606941
+Rendimiento: 0.680641928616094
+ Redundancia: 0.31935807138390604
+Tamano archivo original: 2768 bytes
+Tamano archivo comprimido: 2132 bytes
+Tasa de compresion = 1:1
+
+
+Archivo: Imagen.fan creado correctamente
+La entropia de la fuente es : 97639.38734208043
+La longitud media de la fuente es : 174758.5353684461
+Rendimiento: 0.5587102634857051
+ Redundancia: 0.44128973651429493
+Tamano archivo original: 196618 bytes
+Tamano archivo comprimido: 75016 bytes
+Tasa de compresion = 2:1
+
