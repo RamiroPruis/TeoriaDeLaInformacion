@@ -11,6 +11,20 @@ public class ShannonFano {
     private String originalString;
     private HashMap<Character, String> compressedResult;
     private HashMap<Character, Double> characterFrequency;
+    private double entropy;
+    private double averageLengthAfter;
+
+    public double getRendimiento(){
+        return entropy/averageLengthAfter;
+    }
+
+    public double getEntropy() {
+        return entropy;
+    }
+
+    public double getAverageLengthAfter() {
+        return averageLengthAfter;
+    }
 
     public ShannonFano(String str){
 
@@ -21,6 +35,9 @@ public class ShannonFano {
 
         this.calculateFrequency();
         this.compressString();
+        this.calculateEntropy();
+        this.calculateAverageLengthAfterCompression();
+
     }
 
     private void calculateFrequency() {
@@ -69,6 +86,22 @@ public class ShannonFano {
             appendBit(result, upList, true);
             List<Character> downList = charList.subList(separator, charList.size());
             appendBit(result, downList, false);
+        }
+    }
+
+    private void calculateEntropy() {
+        double probability = 0.0;
+        for (Character c : originalString.toCharArray()) {
+            probability = 1.0 * characterFrequency.get(c) / this.originalString.length();
+            this.entropy += probability * (Math.log(1.0 / probability) / Math.log(2));
+        }
+    }
+
+    private void calculateAverageLengthAfterCompression() {
+        double probability = 0.0;
+        for (Character c : originalString.toCharArray()) {
+            probability = 1.0 * characterFrequency.get(c) / this.originalString.length();
+            this.averageLengthAfter += probability * compressedResult.get(c).length();
         }
     }
 

@@ -80,6 +80,7 @@ public class Lectura {
 
     /**
      * A partir de una secuencia binaria de digitos arma una fuente de un largo especifico
+     *
      * @return La fuente indexada por sus simbolos con la cantidad de apariciones de cada uno
      */
     public static HashMap<String,Integer> cuentaApariciones(FileInputStream file) throws FileNotFoundException {

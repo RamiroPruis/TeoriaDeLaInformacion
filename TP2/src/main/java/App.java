@@ -52,6 +52,8 @@ public class App {
 
             PrintStream out = new PrintStream(newOut);
             Lectura.escribeCodificadoHuffman(huffman,new FileInputStream(inputName),out);
+
+
             System.out.println("Archivo: " + outputName + " creado correctamente");
 
             out = outputResultados;
@@ -60,6 +62,8 @@ public class App {
             out.println("El rendimiento de la fuente dada por el archivo " + outputName + " es:" + rendimiento);
             out.println("La redundancia es " + (1-rendimiento));
  */
+            calcCompression(inputName,newOut);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -73,6 +77,7 @@ public class App {
         try {
             shannon.writeCompressed(new PrintStream("Resultados/" + outPutName));
             System.out.println("Archivo: " + outPutName + " creado correctamente");
+            calcCompression(inputName,"Resultados/" + outPutName);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,12 +88,14 @@ public class App {
         Lectura lectura = new Lectura(inputName);
         HashMap<String,Integer> datos = null;
         String newOut = "Resultados/" + outputName;
+
         try {
             file = new FileInputStream(inputName);
             System.out.println("Archivo: " + outputName + " creado correctamente");
             PrintStream out = new PrintStream(newOut);
             if (outputName.equalsIgnoreCase("imagen.rlc")){
                 Lectura.escribeCodificadoRLC(lectura.getNums(), out,true);
+
             }
             else {
                 Lectura.escribeCodificadoRLC(lectura.getNums(), out,false);
@@ -109,9 +116,14 @@ public class App {
         }
     }
 
+    public static void calcCompression(String originalPath,String compressedPath){
+        File original = new File(originalPath);
+        File compressed = new File(compressedPath);
 
+        System.out.println("Tamano archivo original: "+ original.length() + " bytes");
+        System.out.println("Tamano archivo comprimido: " + compressed.length() + " bytes");
+        System.out.println("Tasa de compresion = " + original.length()/compressed.length() + ":1");
 
-
-
+    }
 
 }
