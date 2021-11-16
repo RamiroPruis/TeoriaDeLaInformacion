@@ -56,30 +56,30 @@ Tasa de compresion = 17:1
 *****************************************************
 
 Archivo: Argentina.fan creado correctamente
-La entropia de la fuente es : 571.6352292240216
-La longitud media de la fuente es : 885.9508580343088
-Rendimiento: 0.6452222762020112
- Redundancia: 0.3547777237979888
+La entropia de la fuente es : 4.620402212905567
+La longitud media de la fuente es : 5.85179407176287
+Rendimiento: 0.7895701995394478
+ Redundancia: 0.21042980046055215
 Tamano archivo original: 2564 bytes
 Tamano archivo comprimido: 1876 bytes
 Tasa de compresion = 1:1
 
 
 Archivo: Hungaro.fan creado correctamente
-La entropia de la fuente es : 506.28767908759556
-La longitud media de la fuente es : 743.8385115606941
-Rendimiento: 0.680641928616094
- Redundancia: 0.31935807138390604
+La entropia de la fuente es : 4.998752937961365
+La longitud media de la fuente es : 6.159320809248555
+Rendimiento: 0.8115753494209078
+ Redundancia: 0.1884246505790922
 Tamano archivo original: 2768 bytes
 Tamano archivo comprimido: 2132 bytes
 Tasa de compresion = 1:1
 
 
 Archivo: Imagen.fan creado correctamente
-La entropia de la fuente es : 97639.38734208043
-La longitud media de la fuente es : 174758.5353684461
-Rendimiento: 0.5587102634857051
- Redundancia: 0.44128973651429493
+La entropia de la fuente es : 1.9422813445701403
+La longitud media de la fuente es : 3.0522485225157414
+Rendimiento: 0.6363444294402548
+ Redundancia: 0.3636555705597452
 Tamano archivo original: 196618 bytes
 Tamano archivo comprimido: 75016 bytes
 Tasa de compresion = 2:1

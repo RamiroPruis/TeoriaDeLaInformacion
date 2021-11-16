@@ -91,15 +91,24 @@ public class ShannonFano {
 
     private void calculateEntropy() {
         double probability = 0.0;
-        for (Character c : originalString.toCharArray()) {
+
+
+        Iterator<Character> it = characterFrequency.keySet().iterator();
+        while (it.hasNext()){
+            Character c = it.next();
             probability = 1.0 * characterFrequency.get(c) / this.originalString.length();
             this.entropy += probability * (Math.log(1.0 / probability) / Math.log(2));
         }
+
     }
 
+    // El problema es que esta iterando el string y se repiten varias veces el mismo caracter, hay que iterar el HASHMAP
     private void calculateAverageLengthAfterCompression() {
         double probability = 0.0;
-        for (Character c : originalString.toCharArray()) {
+
+        Iterator<Character> it = characterFrequency.keySet().iterator();
+        while (it.hasNext()){
+            Character c = it.next();
             probability = 1.0 * characterFrequency.get(c) / this.originalString.length();
             this.averageLengthAfter += probability * compressedResult.get(c).length();
         }
