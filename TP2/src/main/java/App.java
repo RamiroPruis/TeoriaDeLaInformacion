@@ -12,22 +12,32 @@ public class App {
         new File("Resultados").mkdirs();
             System.out.println("Los resultados se almacenan en la carpeta \"Resultados\"");
 
-            comprimeHuffman("Argentina.txt","Argentina.huf");
-            comprimeHuffman("Hungaro.txt","Hungaro.huf");
-            comprimeHuffman("Imagen.raw","Imagen.huf");
+        PrintStream outputResultados = null;
+        try {
+            outputResultados = new PrintStream("Resultados/Resultados.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+            comprimeHuffman("Argentina.txt","Argentina.huf",outputResultados);
+            comprimeHuffman("Hungaro.txt","Hungaro.huf",outputResultados);
+            comprimeHuffman("Imagen.raw","Imagen.huf",outputResultados);
 
-            comprimeRLC("Argentina.txt","Argentina.RLC");
-            comprimeRLC("Hungaro.txt","Hungaro.RLC");
-            comprimeRLC("imagen.raw","Imagen.RLC");
+            outputResultados.println("*****************************************************");
 
-            comprimeShannonFano("Argentina.txt","Argentina.fan");
-            comprimeShannonFano("Hungaro.txt","Hungaro.fan");
-            comprimeShannonFano("Imagen.raw","Imagen.fan");
+            comprimeRLC("Argentina.txt","Argentina.RLC",outputResultados);
+            comprimeRLC("Hungaro.txt","Hungaro.RLC",outputResultados);
+            comprimeRLC("imagen.raw","Imagen.RLC",outputResultados);
+
+            outputResultados.println("*****************************************************");
+
+            comprimeShannonFano("Argentina.txt","Argentina.fan",outputResultados);
+            comprimeShannonFano("Hungaro.txt","Hungaro.fan",outputResultados);
+            comprimeShannonFano("Imagen.raw","Imagen.fan",outputResultados);
 
 
     }
 
-    public static void comprimeHuffman(String inputName,String outputName){
+    public static void comprimeHuffman(String inputName,String outputName, PrintStream outputResultados){
         FileInputStream file = null;
         HashMap<String,Integer> datos = null;
         HashMap<String,String> huffman = null;
@@ -43,13 +53,20 @@ public class App {
             PrintStream out = new PrintStream(newOut);
             Lectura.escribeCodificadoHuffman(huffman,new FileInputStream(inputName),out);
             System.out.println("Archivo: " + outputName + " creado correctamente");
+
+            out = outputResultados;
+/*
+            double rendimiento = fuente.calculaEntropia()/fuente.calculaLongitudMedia();
+            out.println("El rendimiento de la fuente dada por el archivo " + outputName + " es:" + rendimiento);
+            out.println("La redundancia es " + (1-rendimiento));
+ */
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    public static void comprimeShannonFano(String inputName, String outPutName){
+    public static void comprimeShannonFano(String inputName, String outPutName, PrintStream outputResultados){
         Lectura lectura = new Lectura(inputName);
         String strInitial = lectura.getNums();
         ShannonFano shannon = new ShannonFano(strInitial);
@@ -61,25 +78,29 @@ public class App {
         }
     }
 
-    public static void comprimeRLC(String inputName, String outputName){
+    public static void comprimeRLC(String inputName, String outputName, PrintStream outputResultados){
         FileInputStream file = null;
         Lectura lectura = new Lectura(inputName);
         HashMap<String,Integer> datos = null;
         String newOut = "Resultados/" + outputName;
-
         try {
             file = new FileInputStream(inputName);
             System.out.println("Archivo: " + outputName + " creado correctamente");
             PrintStream out = new PrintStream(newOut);
             if (outputName.equalsIgnoreCase("imagen.rlc")){
                 Lectura.escribeCodificadoRLC(lectura.getNums(), out,true);
-
             }
             else {
                 Lectura.escribeCodificadoRLC(lectura.getNums(), out,false);
             }
-            datos = Lectura.AparicionesRLC(file, out);
+            datos = lectura.AparicionesRLC(file, out);
 
+            Fuente fuente = new Fuente(datos);
+            out = outputResultados;
+
+            double rendimiento = fuente.calculaEntropia()/fuente.calculaLongitudMediaRLC();
+            out.println("El rendimiento de la fuente dada por el archivo " + outputName + " es:" + rendimiento);
+            out.println("La redundancia es " + (1-rendimiento));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -87,6 +108,7 @@ public class App {
             e.printStackTrace();
         }
     }
+
 
 
 

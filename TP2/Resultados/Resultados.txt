@@ -1,0 +1,8 @@
+*****************************************************
+El rendimiento de la fuente dada por el archivo Argentina.RLC es:0.30067023875990456
+La redundancia es 0.6993297612400955
+El rendimiento de la fuente dada por el archivo Hungaro.RLC es:0.3070291687328682
+La redundancia es 0.6929708312671319
+El rendimiento de la fuente dada por el archivo Imagen.RLC es:0.05359564596541115
+La redundancia es 0.9464043540345889
+*****************************************************

@@ -9,40 +9,35 @@ import java.util.*;
 public class Fuente {
     private int cantElementos;
     private HashMap<String,Double> probabilidades = new HashMap<String,Double>();
-    private HashMap<String,Double> informacion = new HashMap<String,Double>();
+    private HashMap<String,Integer> apariciones = new HashMap<String,Integer>();
 
 
-    public Fuente(int cantElementos) {
-        this.cantElementos=cantElementos;
+    public Fuente(HashMap<String,Integer> frecuencias) {
+        this.cantElementos=frecuencias.size();
+        this.apariciones=frecuencias;
+        this.calculaProbabilidades(frecuencias);
     }
 
-    /**
-     * Agrega el elemento a la fuente y calcula I(S)
-     * @param simbolo simbolo a insertar en la fuente
-     * @param probabilidad valor entre 0 y 1 que define la probabilidad de aparicion del simbolo
-     */
-    public void agregaElemento(String simbolo, double probabilidad){
-        this.probabilidades.put(simbolo,probabilidad);
-        double infoact = (-Math.log(probabilidad) / Math.log(2));
-        this.informacion.put(simbolo,infoact);
+    public void calculaProbabilidades(HashMap<String,Integer>frecuencias){
+        int suma=0;
+
+        Set<String> Codigos = frecuencias.keySet();
+        Iterator<String> itCod = Codigos.iterator();
+        while(itCod.hasNext()) {
+            String act = itCod.next();
+            suma += frecuencias.get(act);
+        }
+
+        itCod = Codigos.iterator();
+        while(itCod.hasNext()) {
+            String act = itCod.next();
+            this.probabilidades.put(act,(double) frecuencias.get(act)/suma);
+        }
+
     }
 
     public Set<String> getSetCodigos() {
         return this.probabilidades.keySet();
-    }
-
-    /**
-     * Imprime los datos de la fuente. Muestra la cantidad de simbolos, la probabilidad de aparicion de cada uno y la cantidad de informacion
-     * @param output Define la terminal de salida de los datos
-     */
-    public void imprimeFuente(PrintStream output){
-        output.println("Datos de la fuente:");
-        output.println("*********************************");
-        output.println("Cantidad de simbolos: " + cantElementos);
-        this.probabilidades.forEach((key,value) ->  output.printf("- %s: Probabilidad: %.4f | Cantidad de Informacion: %.3f  \n",key,value,informacion.get(key)));
-
-        output.printf(" --> La entropia de la fuente es: %.3f bits/simbolo \n",calculaEntropia());
-        output.println("\n*********************************");
     }
 
     /**
@@ -56,7 +51,7 @@ public class Fuente {
         Iterator<String> itCod = Codigos.iterator();
         while(itCod.hasNext()) {
             String act = itCod.next();
-            suma += probabilidades.get(act) * informacion.get(act);
+            suma += probabilidades.get(act) * (-Math.log(probabilidades.get(act)) / Math.log(2));
         }
         return suma;
     }
@@ -71,7 +66,9 @@ public class Fuente {
         Iterator<String> itCod = Codigos.iterator();
         while(itCod.hasNext()) {
             String act=itCod.next();
+            System.out.println(act + ":" + this.probabilidades.get(act));
             longitud+=(this.probabilidades.get(act)*act.length());
+            System.out.println(longitud);
         }
         return longitud;
     }
@@ -92,14 +89,25 @@ public class Fuente {
         return longitud;
     }
 
-    public void cumpleKraft(int largo) {
-        double sum = probabilidades.size() * (Math.pow(2, -largo));
-        System.out.println("El valor de la sumatoria es: " + sum);
-        if (sum <= 1)
-            System.out.println("Cumple con la Inecuacion de Kraft");
-        else {
-            System.out.println("No cumple con la inecuacion");
+    public int calculaLongitudMediaRLC(){
+        int bits = Integer.SIZE-Integer.numberOfLeadingZeros(this.getMayorValor());
+        bits+= Integer.SIZE-Integer.numberOfLeadingZeros(apariciones.size());
+        return bits;
+    }
+
+    public int getMayorValor(){
+        int max = 0;
+        String letra="";
+        Set<String> Codigos = apariciones.keySet();
+        Iterator<String> itCod = Codigos.iterator();
+        while(itCod.hasNext()) {
+            String act = itCod.next();
+            if (apariciones.get(act)>max) {
+                max = apariciones.get(act);
+                letra=act;
+            }
         }
+        return max;
     }
 
 }
