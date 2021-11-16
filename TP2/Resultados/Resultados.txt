@@ -1,8 +1,23 @@
+La entropia de la fuente es : 7.574033462512692
+La longitud media de la fuente es : 7.61020881670536
+El rendimiento de la fuente dada por el archivo Argentina.huf es:0.9952464702265122
+La redundancia es 0.004753529773487752
+
+La entropia de la fuente es : 7.638372968615631
+La longitud media de la fuente es : 7.711111111111119
+El rendimiento de la fuente dada por el archivo Hungaro.huf es:0.9905670996763776
+La redundancia es 0.009432900323622428
+
+La entropia de la fuente es : 1.0719570043010789
+La longitud media de la fuente es : 1.3778876377063687
+El rendimiento de la fuente dada por el archivo Imagen.huf es:0.777971276442728
+La redundancia es 0.222028723557272
+
 *****************************************************
-El rendimiento de la fuente dada por el archivo Argentina.RLC es:0.30067023875990456
-La redundancia es 0.6993297612400955
-El rendimiento de la fuente dada por el archivo Hungaro.RLC es:0.3070291687328682
-La redundancia es 0.6929708312671319
+El rendimiento de la fuente dada por el archivo Argentina.RLC es:0.2967915032722585
+La redundancia es 0.7032084967277414
+El rendimiento de la fuente dada por el archivo Hungaro.RLC es:0.30408579229967947
+La redundancia es 0.6959142077003205
 El rendimiento de la fuente dada por el archivo Imagen.RLC es:0.05359564596541115
 La redundancia es 0.9464043540345889
 *****************************************************

@@ -47,21 +47,24 @@ public class App {
         try {
             file = new FileInputStream(inputName);
             datos = Lectura.cuentaApariciones(file);
-
+            Fuente fuenteHuff = new Fuente(datos);
             huffman = (HashMap<String, String>) Huffman.creaArbolHuffman(datos);
+            double entropia,longmedia;
 
             PrintStream out = new PrintStream(newOut);
             Lectura.escribeCodificadoHuffman(huffman,new FileInputStream(inputName),out);
-
-
             System.out.println("Archivo: " + outputName + " creado correctamente");
 
             out = outputResultados;
-/*
-            double rendimiento = fuente.calculaEntropia()/fuente.calculaLongitudMedia();
+            entropia = fuenteHuff.calculaEntropia();
+            longmedia = fuenteHuff.calculaLongitudMedia(huffman);
+            out.println("La entropia de la fuente es : " + entropia );
+            out.println("La longitud media de la fuente es : " + longmedia);
+
+            double rendimiento = entropia/longmedia;
             out.println("El rendimiento de la fuente dada por el archivo " + outputName + " es:" + rendimiento);
             out.println("La redundancia es " + (1-rendimiento));
- */
+            out.println();
             calcCompression(inputName,newOut);
 
         } catch (IOException e) {

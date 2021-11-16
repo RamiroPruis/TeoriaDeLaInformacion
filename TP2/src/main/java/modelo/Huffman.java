@@ -81,6 +81,5 @@ public class Huffman
 
         // Imprime el MAPA
         return huffmanCode;
-
     }
 }
