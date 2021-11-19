@@ -80,13 +80,34 @@ public class ShannonFano {
         }
 
         if (charList.size() >= 2) {
-            int separator = (int) Math.floor((float) charList.size() / 2.0);
+            int separator = findSeparator(charList);
 
             List<Character> upList = charList.subList(0, separator);
             appendBit(result, upList, true);
             List<Character> downList = charList.subList(separator, charList.size());
             appendBit(result, downList, false);
         }
+    }
+
+
+    private int findSeparator(List<Character> charList){
+        double sum1 = 0;
+        double sum2 = 0;
+        int i = 0;
+        int j = charList.size() - 1;
+
+        while (i < j ){
+
+            if (sum1>sum2){
+                sum2 += characterFrequency.get(charList.get(j));
+                j--;
+            }
+            else{
+                sum1 += characterFrequency.get(charList.get(i));
+                i++;
+            }
+        }
+        return i;
     }
 
     private void calculateEntropy() {
@@ -102,7 +123,6 @@ public class ShannonFano {
 
     }
 
-    // El problema es que esta iterando el string y se repiten varias veces el mismo caracter, hay que iterar el HASHMAP
     private void calculateAverageLengthAfterCompression() {
         double probability = 0.0;
 
