@@ -76,6 +76,7 @@ public class Lectura {
         while (i < n);
         output.print(count);
         output.print(word.charAt(i-1));
+        output.close();
     }
 
     /**

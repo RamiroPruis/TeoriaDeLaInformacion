@@ -105,7 +105,6 @@ public class App {
             PrintStream out = new PrintStream(newOut);
             if (outputName.equalsIgnoreCase("imagen.rlc")){
                 Lectura.escribeCodificadoRLC(lectura.getNums(), out,true);
-
             }
             else {
                 Lectura.escribeCodificadoRLC(lectura.getNums(), out,false);
