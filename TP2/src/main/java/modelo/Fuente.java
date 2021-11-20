@@ -92,6 +92,10 @@ public class Fuente {
 
 
         bits+= Integer.SIZE-Integer.numberOfLeadingZeros(apariciones.size());
+        if (bits%8!=0){
+            bits=(int) (bits/8)+1;
+            bits*=8;
+        }
         return bits;
     }
 

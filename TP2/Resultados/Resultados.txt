@@ -3,7 +3,7 @@ La entropia de la fuente es : 7.574033462512692
 La longitud media de la fuente es : 7.61020881670536
 El rendimiento de la fuente dada por el archivo Argentina.huf es:0.9952464702265122
 La redundancia es 0.004753529773487752
-Tamano archivo original: 2564 bytes
+Tamano archivo original: 2500 bytes
 Tamano archivo comprimido: 410 bytes
 Tasa de compresion = 6:1
 
@@ -12,7 +12,7 @@ La entropia de la fuente es : 7.638372968615631
 La longitud media de la fuente es : 7.711111111111119
 El rendimiento de la fuente dada por el archivo Hungaro.huf es:0.9905670996763776
 La redundancia es 0.009432900323622428
-Tamano archivo original: 2768 bytes
+Tamano archivo original: 2706 bytes
 Tamano archivo comprimido: 347 bytes
 Tasa de compresion = 7:1
 
@@ -27,28 +27,28 @@ Tasa de compresion = 17:1
 
 *****************************************************
 Archivo: Argentina.RLC creado correctamente
-La entropia de la fuente es : 4.451872549083878
+La entropia de la fuente es : 4.5100535813985685
 La longitud media de la fuente es : 8.0
-El rendimiento de la fuente dada por el archivo Argentina.RLC es:0.5564840686354847
-La redundancia es 0.4435159313645153
-Tamano archivo original: 2564 bytes
-Tamano archivo comprimido: 5193 bytes
+El rendimiento de la fuente dada por el archivo Argentina.RLC es:0.5637566976748211
+La redundancia es 0.43624330232517894
+Tamano archivo original: 2500 bytes
+Tamano archivo comprimido: 5063 bytes
 Tasa de compresion = 0:1
 
 Archivo: Hungaro.RLC creado correctamente
-La entropia de la fuente es : 4.8653726767948715
-La longitud media de la fuente es : 9.0
-El rendimiento de la fuente dada por el archivo Hungaro.RLC es:0.540596964088319
-La redundancia es 0.45940303591168097
-Tamano archivo original: 2768 bytes
-Tamano archivo comprimido: 6369 bytes
+La entropia de la fuente es : 4.912466699725891
+La longitud media de la fuente es : 16.0
+El rendimiento de la fuente dada por el archivo Hungaro.RLC es:0.3070291687328682
+La redundancia es 0.6929708312671319
+Tamano archivo original: 2706 bytes
+Tamano archivo comprimido: 6245 bytes
 Tasa de compresion = 0:1
 
 Archivo: Imagen.RLC creado correctamente
 La entropia de la fuente es : 1.071912919308223
-La longitud media de la fuente es : 18.0
-El rendimiento de la fuente dada por el archivo Imagen.RLC es:0.05955071773934573
-La redundancia es 0.9404492822606543
+La longitud media de la fuente es : 24.0
+El rendimiento de la fuente dada por el archivo Imagen.RLC es:0.044663038304509295
+La redundancia es 0.9553369616954908
 Tamano archivo original: 196618 bytes
 Tamano archivo comprimido: 11522 bytes
 Tasa de compresion = 17:1
@@ -56,22 +56,22 @@ Tasa de compresion = 17:1
 *****************************************************
 
 Archivo: Argentina.fan creado correctamente
-La entropia de la fuente es : 4.620402212905567
-La longitud media de la fuente es : 4.698907956318252
-Rendimiento: 0.9832927684171543
- Redundancia: 0.016707231582845705
-Tamano archivo original: 2564 bytes
-Tamano archivo comprimido: 1507 bytes
+La entropia de la fuente es : 4.5659173204932175
+La longitud media de la fuente es : 4.629199999999998
+Rendimiento: 0.9863296726201545
+ Redundancia: 0.013670327379845526
+Tamano archivo original: 2500 bytes
+Tamano archivo comprimido: 1447 bytes
 Tasa de compresion = 1:1
 
 
 Archivo: Hungaro.fan creado correctamente
-La entropia de la fuente es : 4.998752937961365
-La longitud media de la fuente es : 5.09393063583815
-Rendimiento: 0.9813154703742595
- Redundancia: 0.01868452962574052
-Tamano archivo original: 2768 bytes
-Tamano archivo comprimido: 1763 bytes
+La entropia de la fuente es : 4.9550345827432
+La longitud media de la fuente es : 5.049519586104951
+Rendimiento: 0.9812883182745243
+ Redundancia: 0.01871168172547566
+Tamano archivo original: 2706 bytes
+Tamano archivo comprimido: 1709 bytes
 Tasa de compresion = 1:1
 
 
