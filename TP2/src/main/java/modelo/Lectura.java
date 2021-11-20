@@ -46,11 +46,12 @@ public class Lectura {
         output.close();
     }
 
-    public static void escribeCodificadoRLC(String word, PrintStream output, boolean img) throws IOException{
+    public static int escribeCodificadoRLC(String word, PrintStream output, boolean img) throws IOException{
         char strout;
         int i=1;
         int n;
         int count = 1;
+        int valMaxApariciones = 0;
         if (img)
             word = word.replace("\n","").replace("\r","");
         n=word.length();
@@ -68,6 +69,9 @@ public class Lectura {
                 }
                 else
                     output.print(strout);
+
+                if (count > valMaxApariciones)
+                    valMaxApariciones = count;
                 count = 1;
 
             }
@@ -77,6 +81,7 @@ public class Lectura {
         output.print(count);
         output.print(word.charAt(i-1));
         output.close();
+        return valMaxApariciones;
     }
 
     /**
@@ -100,7 +105,7 @@ public class Lectura {
     }
 
 
-    public static HashMap<String,Integer> AparicionesRLC(FileInputStream file, PrintStream output) throws FileNotFoundException, IOException {
+    public static HashMap<String,Integer> AparicionesRLC(FileInputStream file) throws IOException {
         HashMap<String,Integer> fuente = new HashMap<>();
         Scanner input = new Scanner(file);
         input.useDelimiter(System.getProperty("line.separator"));

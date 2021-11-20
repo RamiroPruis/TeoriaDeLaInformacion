@@ -98,26 +98,31 @@ public class App {
         Lectura lectura = new Lectura(inputName);
         HashMap<String,Integer> datos = null;
         String newOut = "Resultados/" + outputName;
+        int valMaxApariciones;
 
         try {
             file = new FileInputStream(inputName);
             System.out.println("Archivo: " + outputName + " creado correctamente");
             PrintStream out = new PrintStream(newOut);
             if (outputName.equalsIgnoreCase("imagen.rlc")){
-                Lectura.escribeCodificadoRLC(lectura.getNums(), out,true);
+                valMaxApariciones = Lectura.escribeCodificadoRLC(lectura.getNums(), out,true);
             }
             else {
-                Lectura.escribeCodificadoRLC(lectura.getNums(), out,false);
+                valMaxApariciones = Lectura.escribeCodificadoRLC(lectura.getNums(), out,false);
             }
-            datos = lectura.AparicionesRLC(file, out);
+            //FileInputStream newFile = new FileInputStream(newOut);
+
+            datos = Lectura.AparicionesRLC(file);
 
             Fuente fuente = new Fuente(datos);
             out = outputResultados;
+            double entropia = fuente.calculaEntropia();
+            double longitudMedia = fuente.calculaLongitudMediaRLC(valMaxApariciones); // o calculaLongitudMedia
 
-            double rendimiento = fuente.calculaEntropia()/fuente.calculaLongitudMediaRLC();
+            double rendimiento = entropia/longitudMedia;
             out.println("Archivo: " + outputName + " creado correctamente");
-            out.println("La entropia de la fuente es : " + fuente.calculaEntropia());
-            out.println("La longitud media de la fuente es : " + fuente.calculaLongitudMedia());
+            out.println("La entropia de la fuente es : " + entropia);
+            out.println("La longitud media de la fuente es : " + longitudMedia);
             out.println("El rendimiento de la fuente dada por el archivo " + outputName + " es:" + rendimiento);
             out.println("La redundancia es " + (1-rendimiento));
             calcCompression(inputName,"Resultados/" + outputName, outputResultados);

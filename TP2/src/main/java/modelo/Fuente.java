@@ -87,8 +87,10 @@ public class Fuente {
         return longitud;
     }
 
-    public int calculaLongitudMediaRLC(){
-        int bits = Integer.SIZE-Integer.numberOfLeadingZeros(this.getMayorValor());
+    public int calculaLongitudMediaRLC(int valMaxApariciones){
+        int bits = Integer.SIZE-Integer.numberOfLeadingZeros(valMaxApariciones);
+
+
         bits+= Integer.SIZE-Integer.numberOfLeadingZeros(apariciones.size());
         return bits;
     }
