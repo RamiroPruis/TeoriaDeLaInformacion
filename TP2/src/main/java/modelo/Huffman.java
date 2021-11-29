@@ -60,7 +60,7 @@ public class Huffman
 
         //Paso los datos a la cola
         for (var entry: datos.entrySet()) {
-            pq.add(new Nodo(entry.getKey(), entry.getValue()));
+            pq.add(new Nodo(entry.getKey().toString(), entry.getValue()));
         }
 
         while (pq.size() != 1)

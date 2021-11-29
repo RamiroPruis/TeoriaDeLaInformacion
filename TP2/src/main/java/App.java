@@ -47,11 +47,12 @@ public class App {
         try {
             file = new FileInputStream(inputName);
             datos = Lectura.cuentaApariciones(file);
+
             Fuente fuenteHuff = new Fuente(datos);
             huffman = (HashMap<String, String>) Huffman.creaArbolHuffman(datos);
             double entropia,longmedia;
-
             PrintStream out = new PrintStream(newOut);
+
             Lectura.escribeCodificadoHuffman(huffman,new FileInputStream(inputName),out);
             System.out.println("Archivo: " + outputName + " creado correctamente");
 
@@ -140,7 +141,7 @@ public class App {
 
         outputResultados.println("Tamano archivo original: "+ original.length() + " bytes");
         outputResultados.println("Tamano archivo comprimido: " + compressed.length() + " bytes");
-        outputResultados.println("Tasa de compresion = " + original.length()/compressed.length() + ":1");
+        outputResultados.println("Tasa de compresion = " + Math.round((float) original.length()/compressed.length()) + ":1");
         outputResultados.println();
     }
 

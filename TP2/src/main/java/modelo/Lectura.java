@@ -33,10 +33,11 @@ public class Lectura {
 
     public static void escribeCodificadoHuffman(Map<String,String> huffmanCode, FileInputStream file, PrintStream output) throws IOException {
         StringBuilder codigoNuevo = new StringBuilder();
-        Scanner input = new Scanner(file);
-        while(input.hasNext()){
-            String word = input.next();
-            codigoNuevo.append(huffmanCode.get(word));
+        char[] chars = getChars(file);
+
+        for (char aChar : chars) {
+            String valueStr = String.valueOf(aChar);
+            codigoNuevo.append(huffmanCode.get(valueStr));
         }
 
         //codificacion del String obtenido
@@ -44,6 +45,14 @@ public class Lectura {
         byte[] binarydevuelve = numCod.toByteArray();
         output.write(binarydevuelve);
         output.close();
+    }
+
+    public static char[] getChars(FileInputStream file){
+        Scanner input = new Scanner(file);
+        String text = input.nextLine();
+        while(input.hasNextLine())
+            text= text + '\n' + input.nextLine();
+        return text.toCharArray();
     }
 
     public static int escribeCodificadoRLC(String word, PrintStream output, boolean img) throws IOException{
@@ -91,15 +100,15 @@ public class Lectura {
      */
     public static HashMap<String,Integer> cuentaApariciones(FileInputStream file) throws FileNotFoundException {
         HashMap<String,Integer> fuente = new HashMap<>();
-        Scanner input = new Scanner(file);
-        while(input.hasNext()){
-            String word = input.next();
-            if (fuente.get(word) != null){
-                int value = fuente.get(word);
-                fuente.replace(word,value+1);
-            }
-            else
-                fuente.put(word,1);
+
+        char[] chars = getChars(file);
+        for (char aChar : chars) {
+            String valueStr = String.valueOf(aChar);
+            if (fuente.get(valueStr) != null) {
+                int value = fuente.get(valueStr);
+                fuente.replace(valueStr, value + 1);
+            } else
+                fuente.put(valueStr, 1);
         }
         return fuente;
     }

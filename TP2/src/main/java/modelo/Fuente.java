@@ -8,8 +8,8 @@ import java.util.*;
  */
 public class Fuente {
     private int cantElementos;
-    private HashMap<String,Double> probabilidades = new HashMap<String,Double>();
-    private HashMap<String,Integer> apariciones = new HashMap<String,Integer>();
+    private HashMap<String,Double> probabilidades = new HashMap<>();
+    private HashMap<String,Integer> apariciones = new HashMap<>();
 
 
     public Fuente(HashMap<String,Integer> frecuencias) {
