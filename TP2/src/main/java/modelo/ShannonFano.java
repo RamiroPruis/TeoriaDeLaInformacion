@@ -14,6 +14,18 @@ public class ShannonFano {
     private double entropy;
     private double averageLengthAfter;
 
+    public HashMap<String, String> getCompressedResult() {
+        HashMap<String,String > result= new HashMap<>();
+        compressedResult.forEach((k,v)-> result.put(k.toString(),v));
+        return result;
+    }
+
+    public HashMap<String, Integer> getCharacterFrequency() {
+        HashMap<String,Integer> result = new HashMap<>();
+        characterFrequency.forEach((k,v)-> result.put(k.toString(), (int) Math.floor(v)));
+        return result;
+    }
+
     public double getRendimiento(){
         return entropy/averageLengthAfter;
     }

@@ -1,7 +1,6 @@
 import modelo.*;
 
 import java.io.*;
-import java.math.BigInteger;
 import java.util.HashMap;
 
 
@@ -13,15 +12,22 @@ public class App {
             System.out.println("Los resultados se almacenan en la carpeta \"Resultados\"");
 
         PrintStream outputResultados = null;
+        PrintStream outDiccionarioHuff = null;
+        PrintStream outDiccionarioShannon = null;
+
         try {
             outputResultados = new PrintStream("Resultados/Resultados.txt");
+            outDiccionarioHuff = new PrintStream("Resultados/diccHuff.txt");
+            outDiccionarioShannon = new PrintStream("Resultados/diccShannon.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-            comprimeHuffman("Argentina.txt","Argentina.huf",outputResultados);
-            comprimeHuffman("Hungaro.txt","Hungaro.huf",outputResultados);
-            comprimeHuffman("Imagen.raw","Imagen.huf",outputResultados);
 
+            comprimeHuffman("Argentina.txt","Argentina.huf",outputResultados,outDiccionarioHuff);
+            comprimeHuffman("Hungaro.txt","Hungaro.huf",outputResultados,outDiccionarioHuff);
+            comprimeHuffman("Imagen.raw","Imagen.huf",outputResultados,outDiccionarioHuff);
+
+            outDiccionarioHuff.close();
             outputResultados.println("*****************************************************");
 
             comprimeRLC("Argentina.txt","Argentina.RLC",outputResultados);
@@ -30,14 +36,16 @@ public class App {
 
             outputResultados.println("*****************************************************");
 
-            comprimeShannonFano("Argentina.txt","Argentina.fan",outputResultados);
-            comprimeShannonFano("Hungaro.txt","Hungaro.fan",outputResultados);
-            comprimeShannonFano("Imagen.raw","Imagen.fan",outputResultados);
+            comprimeShannonFano("Argentina.txt","Argentina.fan",outputResultados,outDiccionarioShannon);
+            comprimeShannonFano("Hungaro.txt","Hungaro.fan",outputResultados,outDiccionarioShannon);
+            comprimeShannonFano("Imagen.raw","Imagen.fan",outputResultados,outDiccionarioShannon);
+
+            outDiccionarioShannon.close();
 
 
     }
 
-    public static void comprimeHuffman(String inputName,String outputName, PrintStream outputResultados){
+    public static void comprimeHuffman(String inputName,String outputName, PrintStream outputResultados,PrintStream outDiccionario){
         FileInputStream file = null;
         HashMap<String,Integer> datos = null;
         HashMap<String,String> huffman = null;
@@ -50,12 +58,12 @@ public class App {
 
             Fuente fuenteHuff = new Fuente(datos);
             huffman = (HashMap<String, String>) Huffman.creaArbolHuffman(datos);
+            imprimeDiccionario(huffman,datos,"Huffman de "+ inputName,outDiccionario);
             double entropia,longmedia;
             PrintStream out = new PrintStream(newOut);
 
             Lectura.escribeCodificadoHuffman(huffman,new FileInputStream(inputName),out);
             System.out.println("Archivo: " + outputName + " creado correctamente");
-
             out = outputResultados;
             entropia = fuenteHuff.calculaEntropia();
             longmedia = fuenteHuff.calculaLongitudMedia(huffman);
@@ -75,13 +83,34 @@ public class App {
 
     }
 
-    public static void comprimeShannonFano(String inputName, String outPutName, PrintStream outputResultados){
-        Lectura lectura = new Lectura(inputName);
-        String strInitial = lectura.getNums();
-        ShannonFano shannon = new ShannonFano(strInitial);
+    public static void imprimeDiccionario(HashMap<String, String> diccionario,HashMap<String,Integer> frecuency,String title, PrintStream out){
+        out.println("----- Diccionario de Codificacion por " + title + " -----");
+        out.println("Simbolo -> Frecuencia -> Codigo");
+        diccionario.forEach((k,v) -> {
+            if (k.equalsIgnoreCase("\n"))
+                out.println("\\n -> "+ frecuency.get(k) +" -> "+ v);
+            else if (k.equalsIgnoreCase("\s"))
+                out.println("\\s -> "+ frecuency.get(k)+" -> "+ v);
+            else
+                out.println(k + " -> "+ frecuency.get(k)+" -> " + v);
+        });
+        out.println();
+    }
+
+    public static void comprimeShannonFano(String inputName, String outPutName, PrintStream outputResultados,PrintStream outDicc){
+        FileInputStream inputFile = null;
+        try {
+            inputFile = new FileInputStream(inputName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        char[] strInitial = Lectura.getChars(inputFile);
+
+        ShannonFano shannon = new ShannonFano(String.valueOf(strInitial));
         try {
             outputResultados.println();
             shannon.writeCompressed(new PrintStream("Resultados/" + outPutName));
+            imprimeDiccionario(shannon.getCompressedResult(),shannon.getCharacterFrequency()," ShannonFano en "+ inputName,outDicc);
             System.out.println("Archivo: " + outPutName + " creado correctamente");
             outputResultados.println("Archivo: " + outPutName + " creado correctamente");
             outputResultados.println("La entropia de la fuente es : " + shannon.getEntropy() );
@@ -111,7 +140,6 @@ public class App {
             else {
                 valMaxApariciones = Lectura.escribeCodificadoRLC(lectura.getNums(), out,false);
             }
-            //FileInputStream newFile = new FileInputStream(newOut);
 
             datos = Lectura.AparicionesRLC(file);
 
